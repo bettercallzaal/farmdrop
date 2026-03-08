@@ -1,12 +1,22 @@
 // ── Data ──
 const REGIONS = [
-  { id: 'unity', name: 'Unity / Central Maine' },
-  { id: 'newport', name: 'Newport' },
-  { id: 'midcoast', name: 'Midcoast' },
-  { id: 'bluehill', name: 'Blue Hill' },
-  { id: 'mdi', name: 'Mount Desert Island' },
-  { id: 'portland', name: 'Portland' },
+  { id: 'unity', name: 'Unity / Central Maine', hub: 'Unity Market Hub' },
+  { id: 'newport', name: 'Newport', hub: 'Newport Market Hub' },
+  { id: 'midcoast', name: 'Midcoast', hub: 'Union Midcoast Hub' },
+  { id: 'bluehill', name: 'Blue Hill', hub: 'Blue Hill Hub' },
+  { id: 'mdi', name: 'Mount Desert Island', hub: 'MDI Hub' },
+  { id: 'portland', name: 'Portland', hub: 'Portland Hub' },
 ];
+
+const DEMO_TYPES = {
+  'tasting': 'Product Tasting',
+  'cooking': 'Cooking Demo',
+  'farm-tour': 'Farm Tour',
+  'workshop': 'Workshop',
+  'market-day': 'Market Day Event',
+  'restaurant': 'Restaurant Showcase',
+  'ffh': 'Food for Health Outreach',
+};
 
 function loadData(key, fallback) {
   try {
@@ -32,10 +42,11 @@ navBtns.forEach(btn => {
     tabs.forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'ffh') renderFFH();
   });
 });
 
-// ── Populate region selects ──
+// ── Populate region selects & locations ──
 function populateRegionSelects() {
   const selects = [
     document.getElementById('filter-region'),
@@ -55,6 +66,20 @@ function populateRegionSelects() {
     });
     if (existing) sel.value = existing;
   });
+
+  // About page locations
+  const locGrid = document.getElementById('about-locations');
+  if (locGrid) {
+    locGrid.innerHTML = REGIONS.map(r =>
+      `<div class="location-tag">${r.name}<br><small style="font-weight:400;opacity:0.7">${r.hub}</small></div>`
+    ).join('');
+  }
+
+  // Footer regions
+  const footerRegions = document.getElementById('footer-regions');
+  if (footerRegions) {
+    footerRegions.innerHTML = REGIONS.map(r => `<li>${r.name}</li>`).join('');
+  }
 }
 
 function populateRegionPriceInputs(existingPrices) {
@@ -94,6 +119,8 @@ productForm.addEventListener('submit', (e) => {
   const name = document.getElementById('product-name').value.trim();
   const category = document.getElementById('product-category').value;
   const unit = document.getElementById('product-unit').value.trim();
+  const description = document.getElementById('product-description').value.trim();
+  const restaurantAvailable = document.getElementById('product-available-restaurants').checked;
 
   const prices = {};
   REGIONS.forEach(r => {
@@ -105,7 +132,7 @@ productForm.addEventListener('submit', (e) => {
   if (id) {
     const idx = products.findIndex(p => p.id === id);
     if (idx !== -1) {
-      products[idx] = { ...products[idx], name, category, unit, prices };
+      products[idx] = { ...products[idx], name, category, unit, description, restaurantAvailable, prices };
     }
   } else {
     products.push({
@@ -113,6 +140,8 @@ productForm.addEventListener('submit', (e) => {
       name,
       category,
       unit,
+      description,
+      restaurantAvailable,
       prices,
       created: new Date().toISOString(),
     });
@@ -132,6 +161,8 @@ function editProduct(id) {
   document.getElementById('product-name').value = p.name;
   document.getElementById('product-category').value = p.category;
   document.getElementById('product-unit').value = p.unit;
+  document.getElementById('product-description').value = p.description || '';
+  document.getElementById('product-available-restaurants').checked = p.restaurantAvailable || false;
   populateRegionPriceInputs(p.prices);
   productModal.classList.remove('hidden');
 }
@@ -148,6 +179,7 @@ function renderProducts() {
   const container = document.getElementById('product-list');
   const regionFilter = document.getElementById('filter-region').value;
   const catFilter = document.getElementById('filter-category').value;
+  const restFilter = document.getElementById('filter-restaurant').value;
 
   let filtered = products;
   if (catFilter !== 'all') {
@@ -155,6 +187,11 @@ function renderProducts() {
   }
   if (regionFilter !== 'all') {
     filtered = filtered.filter(p => p.prices[regionFilter] != null);
+  }
+  if (restFilter === 'restaurant') {
+    filtered = filtered.filter(p => p.restaurantAvailable);
+  } else if (restFilter === 'consumer') {
+    filtered = filtered.filter(p => !p.restaurantAvailable);
   }
 
   if (filtered.length === 0) {
@@ -168,18 +205,22 @@ function renderProducts() {
       .map(r => `
         <div class="price-item">
           <span class="region-name">${r.name}</span>
-          <span class="price-value">$${p.prices[r.id].toFixed(2)}/${p.unit}</span>
+          <span class="price-value">$${p.prices[r.id].toFixed(2)}/${escapeHtml(p.unit)}</span>
         </div>
       `).join('');
+
+    const badges = [`<span class="badge">${p.category}</span>`];
+    if (p.restaurantAvailable) badges.push('<span class="badge badge-restaurant">Restaurant</span>');
 
     return `
       <div class="product-card">
         <div class="product-card-header">
           <div>
             <h3>${escapeHtml(p.name)}</h3>
-            <span class="badge">${p.category}</span>
+            <div style="display:flex;gap:0.3rem;margin-top:0.3rem">${badges.join('')}</div>
           </div>
         </div>
+        ${p.description ? `<p class="product-desc">${escapeHtml(p.description)}</p>` : ''}
         <div class="price-grid">${priceItems || '<em style="color:#999">No regional prices set</em>'}</div>
         <div class="card-actions">
           <button class="btn-edit" onclick="editProduct('${p.id}')">Edit</button>
@@ -192,6 +233,7 @@ function renderProducts() {
 
 document.getElementById('filter-region').addEventListener('change', renderProducts);
 document.getElementById('filter-category').addEventListener('change', renderProducts);
+document.getElementById('filter-restaurant').addEventListener('change', renderProducts);
 
 // ── Demos ──
 const demoModal = document.getElementById('demo-modal');
@@ -228,6 +270,7 @@ demoForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const id = document.getElementById('edit-demo-id').value;
   const title = document.getElementById('demo-title').value.trim();
+  const type = document.getElementById('demo-type').value;
   const region = document.getElementById('demo-region').value;
   const date = document.getElementById('demo-date').value;
   const time = document.getElementById('demo-time').value;
@@ -237,12 +280,13 @@ demoForm.addEventListener('submit', (e) => {
   if (id) {
     const idx = demos.findIndex(d => d.id === id);
     if (idx !== -1) {
-      demos[idx] = { ...demos[idx], title, region, date, time, description, products: checkedProducts };
+      demos[idx] = { ...demos[idx], title, type, region, date, time, description, products: checkedProducts };
     }
   } else {
     demos.push({
       id: 'd_' + Date.now(),
       title,
+      type,
       region,
       date,
       time,
@@ -264,6 +308,7 @@ function editDemo(id) {
   document.getElementById('demo-modal-title').textContent = 'Edit Demo';
   document.getElementById('edit-demo-id').value = d.id;
   document.getElementById('demo-title').value = d.title;
+  document.getElementById('demo-type').value = d.type || 'tasting';
   document.getElementById('demo-region').value = d.region;
   document.getElementById('demo-date').value = d.date;
   document.getElementById('demo-time').value = d.time;
@@ -283,10 +328,14 @@ function deleteDemo(id) {
 function renderDemos() {
   const container = document.getElementById('demo-list');
   const regionFilter = document.getElementById('filter-demo-region').value;
+  const typeFilter = document.getElementById('filter-demo-type').value;
 
   let filtered = demos;
   if (regionFilter !== 'all') {
     filtered = filtered.filter(d => d.region === regionFilter);
+  }
+  if (typeFilter !== 'all') {
+    filtered = filtered.filter(d => d.type === typeFilter);
   }
 
   filtered.sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
@@ -298,6 +347,7 @@ function renderDemos() {
 
   container.innerHTML = filtered.map(d => {
     const regionName = REGIONS.find(r => r.id === d.region)?.name || d.region;
+    const typeName = DEMO_TYPES[d.type] || d.type;
     const featuredProducts = (d.products || [])
       .map(pid => products.find(p => p.id === pid))
       .filter(Boolean)
@@ -315,7 +365,10 @@ function renderDemos() {
       <div class="demo-card">
         <div class="demo-card-header">
           <h3>${escapeHtml(d.title)}</h3>
-          <span class="badge">${regionName}</span>
+          <div class="demo-badges">
+            <span class="badge">${regionName}</span>
+            <span class="badge badge-type">${typeName}</span>
+          </div>
         </div>
         <div class="demo-details">
           <span>${dateStr}</span>
@@ -333,11 +386,35 @@ function renderDemos() {
 }
 
 document.getElementById('filter-demo-region').addEventListener('change', renderDemos);
+document.getElementById('filter-demo-type').addEventListener('change', renderDemos);
+
+// ── Food for Health ──
+function renderFFH() {
+  const container = document.getElementById('ffh-products-list');
+  if (!container) return;
+  const restProducts = products.filter(p => p.restaurantAvailable);
+  if (restProducts.length === 0) {
+    container.innerHTML = '<p class="empty-msg">Mark products as restaurant-available in the Products tab to see them here. These products can also be offered through Food for Health distribution.</p>';
+    return;
+  }
+  container.innerHTML = restProducts.map(p => {
+    const regionCount = Object.keys(p.prices).length;
+    return `<div style="padding:0.6rem 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
+      <span><strong>${escapeHtml(p.name)}</strong> <span class="badge">${p.category}</span> <span class="badge badge-restaurant">Restaurant</span></span>
+      <span style="color:#666;font-size:0.85rem">${regionCount} region${regionCount !== 1 ? 's' : ''}</span>
+    </div>`;
+  }).join('');
+}
 
 // ── Dashboard ──
 function renderDashboard() {
   document.getElementById('stat-products').textContent = products.length;
   document.getElementById('stat-demos').textContent = demos.length;
+
+  // Count unique regions across all products
+  const activeRegions = new Set();
+  products.forEach(p => Object.keys(p.prices).forEach(r => activeRegions.add(r)));
+  document.getElementById('stat-regions').textContent = activeRegions.size;
 
   // Recent products
   const recentProducts = document.getElementById('recent-products');
@@ -347,8 +424,10 @@ function renderDashboard() {
     const recent = products.slice(-3).reverse();
     recentProducts.innerHTML = recent.map(p => {
       const priceCount = Object.keys(p.prices).length;
+      const badges = [`<span class="badge">${p.category}</span>`];
+      if (p.restaurantAvailable) badges.push('<span class="badge badge-restaurant">Restaurant</span>');
       return `<div style="padding:0.5rem 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-        <span><strong>${escapeHtml(p.name)}</strong> <span class="badge">${p.category}</span></span>
+        <span><strong>${escapeHtml(p.name)}</strong> ${badges.join(' ')}</span>
         <span style="color:#666;font-size:0.85rem">${priceCount} region${priceCount !== 1 ? 's' : ''}</span>
       </div>`;
     }).join('');
@@ -363,8 +442,9 @@ function renderDashboard() {
   } else {
     upcomingDemos.innerHTML = upcoming.map(d => {
       const regionName = REGIONS.find(r => r.id === d.region)?.name || d.region;
+      const typeName = DEMO_TYPES[d.type] || '';
       return `<div style="padding:0.5rem 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center">
-        <span><strong>${escapeHtml(d.title)}</strong> <span class="badge">${regionName}</span></span>
+        <span><strong>${escapeHtml(d.title)}</strong> <span class="badge">${regionName}</span> ${typeName ? `<span class="badge badge-type">${typeName}</span>` : ''}</span>
         <span style="color:#666;font-size:0.85rem">${d.date}</span>
       </div>`;
     }).join('');

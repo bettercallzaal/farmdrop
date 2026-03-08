@@ -3,44 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FarmDrop — Farmer Pricing & Demos</title>
+  <title>FarmDrop — Maine's Online Farmers Market</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <div class="logo">FarmDrop</div>
+    <span class="logo-tagline">Maine's Online Farmers Market</span>
     <nav>
       <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="nav-btn" data-tab="about">About</button>
       <button class="nav-btn" data-tab="products">Products & Pricing</button>
       <button class="nav-btn" data-tab="demos">Demos</button>
+      <button class="nav-btn" data-tab="ffh">Food for Health</button>
     </nav>
   </header>
 
   <main>
     <!-- Dashboard Tab -->
     <section id="dashboard" class="tab-content active">
-      <h1>Welcome, Farmer</h1>
+      <div class="hero-banner">
+        <div class="hero-text">
+          <h1>Welcome to FarmDrop</h1>
+          <p class="hero-subtitle">A collaborative marketplace connecting Maine's farmers directly to communities. Farmers are paid in advance — you only bring what you've sold.</p>
+        </div>
+        <div class="hero-stats-row">
+          <div class="hero-stat">
+            <span class="hero-stat-number">65+</span>
+            <span class="hero-stat-label">Maine Farmers</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">1,000+</span>
+            <span class="hero-stat-label">Customers</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">6</span>
+            <span class="hero-stat-label">Regions</span>
+          </div>
+        </div>
+      </div>
+
       <div class="stats-grid">
         <div class="stat-card">
           <span class="stat-number" id="stat-products">0</span>
-          <span class="stat-label">Products</span>
+          <span class="stat-label">Your Products</span>
         </div>
         <div class="stat-card">
-          <span class="stat-number" id="stat-regions">6</span>
-          <span class="stat-label">Regions</span>
+          <span class="stat-number" id="stat-regions">0</span>
+          <span class="stat-label">Regions Listed</span>
         </div>
         <div class="stat-card">
           <span class="stat-number" id="stat-demos">0</span>
           <span class="stat-label">Scheduled Demos</span>
         </div>
       </div>
-      <div class="recent-section">
-        <h2>Recent Products</h2>
-        <div id="recent-products" class="recent-list"><p class="empty-msg">No products yet. Add some in the Products tab.</p></div>
+
+      <div class="how-it-works">
+        <h2>How FarmDrop Works</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h4>List Your Products</h4>
+            <p>Add your products with region-specific pricing. Set different prices for each of FarmDrop's Maine market locations.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h4>Customers Order Weekly</h4>
+            <p>Shoppers browse and order online each week. You get paid as soon as orders are placed — before you harvest or deliver.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h4>Market Hub Pickup</h4>
+            <p>Deliver in bulk to your regional Market Hub Manager, who parcels out individual orders for customer pickup.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h4>Schedule Demos</h4>
+            <p>Showcase your products at regional demos and tastings to grow your customer base across Maine.</p>
+          </div>
+        </div>
       </div>
-      <div class="recent-section">
-        <h2>Upcoming Demos</h2>
-        <div id="upcoming-demos" class="recent-list"><p class="empty-msg">No demos scheduled yet.</p></div>
+
+      <div class="two-col">
+        <div class="recent-section">
+          <h2>Recent Products</h2>
+          <div id="recent-products" class="recent-list"><p class="empty-msg">No products yet. Add some in the Products tab.</p></div>
+        </div>
+        <div class="recent-section">
+          <h2>Upcoming Demos</h2>
+          <div id="upcoming-demos" class="recent-list"><p class="empty-msg">No demos scheduled yet.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Tab -->
+    <section id="about" class="tab-content">
+      <h1>About FarmDrop</h1>
+      <div class="about-content">
+        <div class="about-card mission-card">
+          <h2>Our Mission</h2>
+          <p>FarmDrop is a Maine-based, mission-driven collaborative marketplace. We host multiple farmers and producers together on a local online storefront, making it easy for communities to access fresh, locally-grown food year-round.</p>
+          <p>Our advance-pay model ensures farmers are paid as soon as customers place orders — not after delivery. This sustains a system where farmers only bring what they've sold, reducing waste and guaranteeing income.</p>
+        </div>
+
+        <div class="about-card">
+          <h2>Leadership</h2>
+          <p><strong>Hannah Semler, CEO</strong> — A Blue Hill native who spent years living in Spain and Central America, Hannah has long been both food and farm obsessed. She and her then business partner took over FarmDrop and grew it into the statewide platform it is today, supporting 65+ farmers and over 1,000 customers across Maine.</p>
+        </div>
+
+        <div class="about-card">
+          <h2>How the Marketplace Works</h2>
+          <div class="info-list">
+            <div class="info-item">
+              <strong>Weekly Online Shopping</strong>
+              <p>Customers shop each week for produce, meat, dairy, coffee, soap, pre-made meals, and more — all sourced from local Maine farms.</p>
+            </div>
+            <div class="info-item">
+              <strong>Advance Payment to Farmers</strong>
+              <p>Unlike farmers markets or retail stores, farmers are paid the moment an order is placed. This financial model sustains small farms.</p>
+            </div>
+            <div class="info-item">
+              <strong>Market Hub Managers</strong>
+              <p>Each location has a dedicated Market Hub Manager who receives bulk harvest deliveries and parcels out individual customer orders for pickup.</p>
+            </div>
+            <div class="info-item">
+              <strong>Local Food Coordinator Jobs</strong>
+              <p>FarmDrop provides gig-economy local food coordinator positions, with plans to add dozens more jobs across the state.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <h2>Our Locations</h2>
+          <p>FarmDrop operates across Maine with regional distribution hubs, and has been rapidly expanding — adding 6 new locations recently.</p>
+          <div class="locations-grid" id="about-locations"></div>
+        </div>
+
+        <div class="about-card">
+          <h2>Recent Growth (2025–2026)</h2>
+          <ul class="growth-list">
+            <li>Expanded to support <strong>65+ farmers</strong> and <strong>1,000+ customers</strong> statewide</li>
+            <li>Added <strong>6 new market locations</strong> in recent months</li>
+            <li>Launched delivery services for <strong>restaurants</strong> sourcing from local farms</li>
+            <li>Partnered with <strong>food security organizations</strong> along existing distribution routes</li>
+            <li>Created <strong>Food for Health</strong> program to address food access challenges</li>
+            <li>Plans to add <strong>dozens of gig-economy jobs</strong> across Maine in the next two years</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -50,6 +159,7 @@
         <h1>Products & Regional Pricing</h1>
         <button class="btn-primary" id="add-product-btn">+ Add Product</button>
       </div>
+      <p class="tab-description">Set different prices for each Maine FarmDrop region. Customers in different areas may have different price points — adjust per market to maximize reach.</p>
 
       <!-- Add Product Modal -->
       <div id="product-modal" class="modal hidden">
@@ -67,16 +177,29 @@
                 <option value="produce">Produce</option>
                 <option value="meat">Meat</option>
                 <option value="dairy">Dairy</option>
+                <option value="coffee">Coffee</option>
                 <option value="baked">Baked Goods</option>
+                <option value="prepared">Pre-Made Meals</option>
                 <option value="preserves">Preserves & Jams</option>
+                <option value="soap">Soap & Body Care</option>
                 <option value="other">Other</option>
               </select>
             </div>
             <div class="form-group">
               <label for="product-unit">Unit</label>
-              <input type="text" id="product-unit" required placeholder="e.g. lb, pint, dozen">
+              <input type="text" id="product-unit" required placeholder="e.g. lb, pint, dozen, bar">
+            </div>
+            <div class="form-group">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" rows="2" placeholder="Brief description of your product"></textarea>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="product-available-restaurants"> Also available for restaurant orders
+              </label>
             </div>
             <h3>Price by Region</h3>
+            <p class="form-hint">Leave blank for regions where you don't sell. Farmers are paid in advance when orders are placed.</p>
             <div class="region-prices" id="region-prices"></div>
             <div class="modal-actions">
               <button type="button" class="btn-secondary" id="cancel-product">Cancel</button>
@@ -96,13 +219,21 @@
           <option value="produce">Produce</option>
           <option value="meat">Meat</option>
           <option value="dairy">Dairy</option>
+          <option value="coffee">Coffee</option>
           <option value="baked">Baked Goods</option>
+          <option value="prepared">Pre-Made Meals</option>
           <option value="preserves">Preserves & Jams</option>
+          <option value="soap">Soap & Body Care</option>
           <option value="other">Other</option>
+        </select>
+        <select id="filter-restaurant">
+          <option value="all">All Channels</option>
+          <option value="consumer">Consumer Only</option>
+          <option value="restaurant">Restaurant Available</option>
         </select>
       </div>
       <div id="product-list" class="product-list">
-        <p class="empty-msg">No products added yet.</p>
+        <p class="empty-msg">No products added yet. Click "+ Add Product" to list your first item.</p>
       </div>
     </section>
 
@@ -112,6 +243,7 @@
         <h1>Demo Management</h1>
         <button class="btn-primary" id="add-demo-btn">+ Schedule Demo</button>
       </div>
+      <p class="tab-description">Schedule product demos and tastings at FarmDrop market locations across Maine. Demos help customers discover your products and build loyalty in each region.</p>
 
       <!-- Add Demo Modal -->
       <div id="demo-modal" class="modal hidden">
@@ -122,6 +254,18 @@
             <div class="form-group">
               <label for="demo-title">Demo Title</label>
               <input type="text" id="demo-title" required placeholder="e.g. Spring Produce Tasting">
+            </div>
+            <div class="form-group">
+              <label for="demo-type">Demo Type</label>
+              <select id="demo-type">
+                <option value="tasting">Product Tasting</option>
+                <option value="cooking">Cooking Demo</option>
+                <option value="farm-tour">Farm Tour</option>
+                <option value="workshop">Workshop</option>
+                <option value="market-day">Market Day Event</option>
+                <option value="restaurant">Restaurant Showcase</option>
+                <option value="ffh">Food for Health Outreach</option>
+              </select>
             </div>
             <div class="form-group">
               <label for="demo-region">Region</label>
@@ -137,7 +281,7 @@
             </div>
             <div class="form-group">
               <label for="demo-description">Description</label>
-              <textarea id="demo-description" rows="3" placeholder="What will you showcase?"></textarea>
+              <textarea id="demo-description" rows="3" placeholder="What will you showcase? What should attendees expect?"></textarea>
             </div>
             <div class="form-group">
               <label for="demo-products">Featured Products</label>
@@ -156,12 +300,102 @@
         <select id="filter-demo-region">
           <option value="all">All Regions</option>
         </select>
+        <select id="filter-demo-type">
+          <option value="all">All Types</option>
+          <option value="tasting">Product Tasting</option>
+          <option value="cooking">Cooking Demo</option>
+          <option value="farm-tour">Farm Tour</option>
+          <option value="workshop">Workshop</option>
+          <option value="market-day">Market Day Event</option>
+          <option value="restaurant">Restaurant Showcase</option>
+          <option value="ffh">Food for Health Outreach</option>
+        </select>
       </div>
       <div id="demo-list" class="demo-list">
         <p class="empty-msg">No demos scheduled yet.</p>
       </div>
     </section>
+
+    <!-- Food for Health Tab -->
+    <section id="ffh" class="tab-content">
+      <h1>Food for Health Program</h1>
+      <div class="about-content">
+        <div class="about-card ffh-card">
+          <h2>About the Program</h2>
+          <p>Food for Health formally launched in <strong>2025</strong> in response to increasing food access challenges following reductions in federal programs such as <strong>SNAP</strong>.</p>
+          <p>The program connects Maine communities facing food insecurity with fresh, locally-grown produce and products through FarmDrop's existing distribution network.</p>
+        </div>
+
+        <div class="about-card">
+          <h2>How It Works</h2>
+          <div class="info-list">
+            <div class="info-item">
+              <strong>Existing Distribution Routes</strong>
+              <p>Food security organizations receive deliveries along FarmDrop's established routes — no extra logistics needed.</p>
+            </div>
+            <div class="info-item">
+              <strong>Restaurant Partnerships</strong>
+              <p>In 2025, FarmDrop also launched initiatives to support restaurants sourcing from local farms, expanding demand for farmer products.</p>
+            </div>
+            <div class="info-item">
+              <strong>Farmer Participation</strong>
+              <p>As a farmer, you can opt into Food for Health by marking products available at reduced or subsidized pricing for qualifying organizations.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <h2>Your FFH Eligible Products</h2>
+          <div id="ffh-products-list">
+            <p class="empty-msg">Mark products as FFH-eligible in the Products tab to see them here.</p>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <h2>Impact</h2>
+          <div class="stats-grid">
+            <div class="stat-card ffh-stat">
+              <span class="stat-number">65+</span>
+              <span class="stat-label">Participating Farmers</span>
+            </div>
+            <div class="stat-card ffh-stat">
+              <span class="stat-number">6</span>
+              <span class="stat-label">Distribution Regions</span>
+            </div>
+            <div class="stat-card ffh-stat">
+              <span class="stat-number">2025</span>
+              <span class="stat-label">Year Launched</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <strong>FarmDrop</strong>
+        <p>Maine's mission-driven online farmers market. Supporting 65+ local farmers and 1,000+ customers across the state.</p>
+      </div>
+      <div class="footer-col">
+        <strong>Regions</strong>
+        <ul id="footer-regions"></ul>
+      </div>
+      <div class="footer-col">
+        <strong>Links</strong>
+        <ul>
+          <li><a href="https://farmdrop.us/" target="_blank">farmdrop.us</a></li>
+          <li><a href="https://farmdrop.us/aboutus/" target="_blank">About Us</a></li>
+          <li><a href="https://farmdrop.us/our-locations/" target="_blank">Our Locations</a></li>
+          <li><a href="https://farmdrop.us/ffh-report/" target="_blank">Food for Health Report</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>FarmDrop — Online Farmers Market With Local Pickup and Delivery | Led by CEO Hannah Semler</p>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>

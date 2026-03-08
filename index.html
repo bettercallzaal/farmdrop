@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmDrop — Farmer Pricing & Demos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">FarmDrop</div>
+    <nav>
+      <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="nav-btn" data-tab="products">Products & Pricing</button>
+      <button class="nav-btn" data-tab="demos">Demos</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Dashboard Tab -->
+    <section id="dashboard" class="tab-content active">
+      <h1>Welcome, Farmer</h1>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" id="stat-products">0</span>
+          <span class="stat-label">Products</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-regions">6</span>
+          <span class="stat-label">Regions</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="stat-demos">0</span>
+          <span class="stat-label">Scheduled Demos</span>
+        </div>
+      </div>
+      <div class="recent-section">
+        <h2>Recent Products</h2>
+        <div id="recent-products" class="recent-list"><p class="empty-msg">No products yet. Add some in the Products tab.</p></div>
+      </div>
+      <div class="recent-section">
+        <h2>Upcoming Demos</h2>
+        <div id="upcoming-demos" class="recent-list"><p class="empty-msg">No demos scheduled yet.</p></div>
+      </div>
+    </section>
+
+    <!-- Products & Pricing Tab -->
+    <section id="products" class="tab-content">
+      <div class="tab-header">
+        <h1>Products & Regional Pricing</h1>
+        <button class="btn-primary" id="add-product-btn">+ Add Product</button>
+      </div>
+
+      <!-- Add Product Modal -->
+      <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+          <h2 id="product-modal-title">Add New Product</h2>
+          <form id="product-form">
+            <input type="hidden" id="edit-product-id">
+            <div class="form-group">
+              <label for="product-name">Product Name</label>
+              <input type="text" id="product-name" required placeholder="e.g. Organic Blueberries">
+            </div>
+            <div class="form-group">
+              <label for="product-category">Category</label>
+              <select id="product-category">
+                <option value="produce">Produce</option>
+                <option value="meat">Meat</option>
+                <option value="dairy">Dairy</option>
+                <option value="baked">Baked Goods</option>
+                <option value="preserves">Preserves & Jams</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="product-unit">Unit</label>
+              <input type="text" id="product-unit" required placeholder="e.g. lb, pint, dozen">
+            </div>
+            <h3>Price by Region</h3>
+            <div class="region-prices" id="region-prices"></div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" id="cancel-product">Cancel</button>
+              <button type="submit" class="btn-primary">Save Product</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Product List -->
+      <div class="filter-bar">
+        <select id="filter-region">
+          <option value="all">All Regions</option>
+        </select>
+        <select id="filter-category">
+          <option value="all">All Categories</option>
+          <option value="produce">Produce</option>
+          <option value="meat">Meat</option>
+          <option value="dairy">Dairy</option>
+          <option value="baked">Baked Goods</option>
+          <option value="preserves">Preserves & Jams</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div id="product-list" class="product-list">
+        <p class="empty-msg">No products added yet.</p>
+      </div>
+    </section>
+
+    <!-- Demos Tab -->
+    <section id="demos" class="tab-content">
+      <div class="tab-header">
+        <h1>Demo Management</h1>
+        <button class="btn-primary" id="add-demo-btn">+ Schedule Demo</button>
+      </div>
+
+      <!-- Add Demo Modal -->
+      <div id="demo-modal" class="modal hidden">
+        <div class="modal-content">
+          <h2 id="demo-modal-title">Schedule a Demo</h2>
+          <form id="demo-form">
+            <input type="hidden" id="edit-demo-id">
+            <div class="form-group">
+              <label for="demo-title">Demo Title</label>
+              <input type="text" id="demo-title" required placeholder="e.g. Spring Produce Tasting">
+            </div>
+            <div class="form-group">
+              <label for="demo-region">Region</label>
+              <select id="demo-region" required></select>
+            </div>
+            <div class="form-group">
+              <label for="demo-date">Date</label>
+              <input type="date" id="demo-date" required>
+            </div>
+            <div class="form-group">
+              <label for="demo-time">Time</label>
+              <input type="time" id="demo-time" required>
+            </div>
+            <div class="form-group">
+              <label for="demo-description">Description</label>
+              <textarea id="demo-description" rows="3" placeholder="What will you showcase?"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="demo-products">Featured Products</label>
+              <div id="demo-products-checklist" class="checklist"></div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn-secondary" id="cancel-demo">Cancel</button>
+              <button type="submit" class="btn-primary">Save Demo</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Demo List -->
+      <div class="filter-bar">
+        <select id="filter-demo-region">
+          <option value="all">All Regions</option>
+        </select>
+      </div>
+      <div id="demo-list" class="demo-list">
+        <p class="empty-msg">No demos scheduled yet.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

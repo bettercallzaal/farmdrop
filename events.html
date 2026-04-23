@@ -14,14 +14,27 @@
     }
 
     .events-hero {
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      background: linear-gradient(135deg, #3a3a3a 0%, #1f1f1f 100%);
       color: var(--white);
       padding: 3.5rem 2rem;
       text-align: center;
       border-radius: 12px;
       margin-bottom: 2.5rem;
       box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
     }
+    .events-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 60%;
+      height: 180%;
+      background: radial-gradient(ellipse at center, rgba(189,214,49,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .events-hero > * { position: relative; z-index: 1; }
     .events-hero .eyebrow {
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -175,11 +188,11 @@
       font-weight: 600;
     }
     .tag.featured {
-      background: var(--orange);
-      color: var(--white);
+      background: var(--green);
+      color: var(--green-dark);
     }
     .tag.invite {
-      background: var(--brown);
+      background: var(--green-dark);
       color: var(--white);
     }
     .event-cta {
@@ -200,10 +213,11 @@
     }
     .btn-primary {
       background: var(--green);
-      color: var(--white);
+      color: var(--green-dark);
     }
     .btn-primary:hover {
-      background: var(--green-dark);
+      background: var(--green-light);
+      color: var(--white);
     }
     .btn-secondary {
       background: var(--green-bg);
@@ -302,12 +316,13 @@
       line-height: 1.5;
     }
     .interview-block .btn {
-      background: var(--white);
+      background: var(--green);
       color: var(--green-dark);
       white-space: nowrap;
     }
     .interview-block .btn:hover {
-      background: var(--green-bg);
+      background: var(--green-light);
+      color: var(--white);
     }
 
     @media (max-width: 700px) {
@@ -334,8 +349,9 @@
 </head>
 <body>
   <header>
-    <div class="logo">FarmDrop</div>
-    <span class="logo-tagline">Events Spring & Summer 2026</span>
+    <a class="logo-link" href="index.html" aria-label="FarmDrop home">
+      <img class="logo-img" src="assets/farmdrop-logo.png" alt="FarmDrop">
+    </a>
     <nav>
       <a class="nav-btn" href="index.html">Home</a>
       <a class="nav-btn active" href="events.html">Events</a>

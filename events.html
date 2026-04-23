@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmDrop Events — Spring & Summer 2026</title>
+  <meta name="description" content="FarmDrop community food system events across Maine. Panels, screenings, benefits, and gatherings supporting local farmers and the Food for Health program.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --accent: var(--green);
+      --accent-dark: var(--green-dark);
+      --accent-light: var(--green-light);
+    }
+
+    .events-hero {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      color: var(--white);
+      padding: 3.5rem 2rem;
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow);
+    }
+    .events-hero .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+      opacity: 0.8;
+      margin-bottom: 0.75rem;
+    }
+    .events-hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin-bottom: 0.75rem;
+      line-height: 1.15;
+      color: var(--white);
+    }
+    .interview-block h3 {
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .events-hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1rem;
+      opacity: 0.92;
+      line-height: 1.5;
+    }
+    .events-hero .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 2rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .intro-card {
+      background: var(--white);
+      border-left: 4px solid var(--green);
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .intro-card strong {
+      display: block;
+      font-size: 1.4rem;
+      color: var(--green-dark);
+      margin-bottom: 0.25rem;
+    }
+    .intro-card span {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--green-dark);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--green-light);
+    }
+
+    .event-card {
+      background: var(--white);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .event-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    }
+    .event-date {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .event-date .month {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+    .event-date .day {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1;
+      margin: 0.25rem 0;
+    }
+    .event-date .weekday {
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+    .event-body {
+      padding: 1.5rem;
+    }
+    .event-body h3 {
+      font-size: 1.25rem;
+      color: var(--green-dark);
+      margin-bottom: 0.35rem;
+    }
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+    }
+    .event-meta span::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--green-light);
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    .event-body p {
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 0.85rem;
+    }
+    .event-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .tag {
+      background: var(--green-bg);
+      color: var(--green-dark);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .tag.featured {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .tag.invite {
+      background: var(--brown);
+      color: var(--white);
+    }
+    .event-cta {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--green-dark);
+    }
+    .btn-secondary {
+      background: var(--green-bg);
+      color: var(--green-dark);
+      border: 1px solid var(--green-light);
+    }
+    .btn-secondary:hover {
+      background: var(--green-light);
+      color: var(--white);
+    }
+
+    .ffh-callout {
+      background: linear-gradient(135deg, var(--cream) 0%, var(--green-bg) 100%);
+      border: 2px solid var(--green-light);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 3rem 0 2rem;
+    }
+    .ffh-callout h2 {
+      color: var(--green-dark);
+      margin-bottom: 0.5rem;
+    }
+    .ffh-callout > p {
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      max-width: 720px;
+    }
+    .ffh-channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .ffh-channel {
+      background: var(--white);
+      padding: 1.25rem;
+      border-radius: 8px;
+      border-top: 3px solid var(--green);
+    }
+    .ffh-channel strong {
+      display: block;
+      color: var(--green-dark);
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+    .ffh-channel p {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .partner-strip {
+      background: var(--white);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+    .partner-strip h3 {
+      color: var(--green-dark);
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .partner-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .partner-chip {
+      background: var(--green-bg);
+      color: var(--green-dark);
+      padding: 0.4rem 0.85rem;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .interview-block {
+      background: var(--green-dark);
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .interview-block h3 {
+      margin-bottom: 0.4rem;
+    }
+    .interview-block p {
+      opacity: 0.9;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .interview-block .btn {
+      background: var(--white);
+      color: var(--green-dark);
+      white-space: nowrap;
+    }
+    .interview-block .btn:hover {
+      background: var(--green-bg);
+    }
+
+    @media (max-width: 700px) {
+      main { padding: 1rem; }
+      .events-hero { padding: 2rem 1.25rem; }
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+      .event-date {
+        flex-direction: row;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+        justify-content: flex-start;
+      }
+      .event-date .day { font-size: 1.8rem; margin: 0; }
+      .event-body { padding: 1.25rem; }
+      .interview-block {
+        grid-template-columns: 1fr;
+      }
+      nav { gap: 0; }
+      .nav-btn { padding: 0.4rem 0.6rem; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">FarmDrop</div>
+    <span class="logo-tagline">Events Spring & Summer 2026</span>
+    <nav>
+      <a class="nav-btn" href="index.html">App</a>
+      <a class="nav-btn active" href="events.html">Events</a>
+      <a class="nav-btn" href="https://farmdrop.us" target="_blank" rel="noopener">Shop</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="events-hero">
+      <div class="eyebrow">FarmDrop x Community Food Systems</div>
+      <h1>Gather. Eat. Build Maine's Food Future.</h1>
+      <p>Five community events across Downeast Maine, Brooksville, Ellsworth, Blue Hill, and Town Hill. Panels, screenings, benefits, and a dance party for Food for Health. Farmers, families, and neighbors building the food system we want together.</p>
+      <div class="hero-meta">
+        <span>65+ farm partners</span>
+        <span>1,000+ customers</span>
+        <span>4 Maine regions</span>
+        <span>13+ pickup locations</span>
+      </div>
+    </section>
+
+    <div class="intro-grid">
+      <div class="intro-card">
+        <strong>5</strong>
+        <span>Events in 2026</span>
+      </div>
+      <div class="intro-card">
+        <strong>2%</strong>
+        <span>Of every FarmDrop order to Food for Health</span>
+      </div>
+      <div class="intro-card">
+        <strong>4</strong>
+        <span>Food security partners Downeast</span>
+      </div>
+      <div class="intro-card">
+        <strong>15 yrs</strong>
+        <span>FarmDrop community food work since 2011</span>
+      </div>
+    </div>
+
+    <h2 class="section-title">Upcoming Events</h2>
+
+    <article class="event-card">
+      <div class="event-date">
+        <span class="month">May</span>
+        <span class="day">9</span>
+        <span class="weekday">Sat 2026</span>
+      </div>
+      <div class="event-body">
+        <h3>Community Solutions Conversation</h3>
+        <div class="event-meta">
+          <span>Reversing Falls Sanctuary, Brooksville ME</span>
+          <span>11:00 AM</span>
+          <span>Free, open to public</span>
+        </div>
+        <div class="event-tags">
+          <span class="tag">Panel</span>
+          <span class="tag">Mutual Aid</span>
+          <span class="tag">Food Systems</span>
+        </div>
+        <p>FarmDrop joins community organizations discussing mutual aid in Downeast Maine's food system. Part of the Reaccion series following a previous gathering with Acadia Action on elder accompaniment, school gardens, and local food access. Hannah Semler speaking.</p>
+        <div class="event-cta">
+          <a class="btn btn-primary" href="https://farmdrop.us" target="_blank" rel="noopener">Learn More</a>
+          <a class="btn btn-secondary" href="#ffh">Support Food for Health</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="event-card">
+      <div class="event-date">
+        <span class="month">May</span>
+        <span class="day">23</span>
+        <span class="weekday">Sat 2026</span>
+      </div>
+      <div class="event-body">
+        <h3>Grocery List Documentary Screening</h3>
+        <div class="event-meta">
+          <span>Ellsworth Public Library, Ellsworth ME</span>
+          <span>2:00 PM</span>
+          <span>Free, open to public</span>
+        </div>
+        <div class="event-tags">
+          <span class="tag">Film</span>
+          <span class="tag">Education</span>
+        </div>
+        <p>A screening of the Grocery List documentary with FarmDrop presence and discussion afterward. Explores where our food comes from, who grows it, and what changes when local networks replace long supply chains.</p>
+        <div class="event-cta">
+          <a class="btn btn-primary" href="https://ellsworthlibrary.net" target="_blank" rel="noopener">Library Info</a>
+          <a class="btn btn-secondary" href="https://farmdrop.us" target="_blank" rel="noopener">FarmDrop</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="event-card">
+      <div class="event-date">
+        <span class="month">May</span>
+        <span class="day">24</span>
+        <span class="weekday">Sun 2026</span>
+      </div>
+      <div class="event-body">
+        <h3>Soulbenders Benefit for Food for Health</h3>
+        <div class="event-meta">
+          <span>Venue TBC (Blue Hill / Ellsworth area)</span>
+          <span>5-8 PM</span>
+          <span>Sliding-scale donation</span>
+        </div>
+        <div class="event-tags">
+          <span class="tag featured">Featured</span>
+          <span class="tag">Benefit</span>
+          <span class="tag">Live Music</span>
+          <span class="tag">Dance Party</span>
+        </div>
+        <p>The Soulbenders play a fundraiser for FarmDrop's Food for Health program. Afternoon conversation on community food systems and mutual aid, partner-org tabling, and a dance party to close. Every dollar goes to Food for Health — buying surplus from Maine farms and routing it to families hit by SNAP cuts. Come hungry, come dancing.</p>
+        <div class="event-cta">
+          <a class="btn btn-primary" href="https://farmdrop.us/ffh-report/" target="_blank" rel="noopener">RSVP / Donate</a>
+          <a class="btn btn-secondary" href="https://thesoulbenders.com" target="_blank" rel="noopener">About the Soulbenders</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="event-card">
+      <div class="event-date">
+        <span class="month">Aug</span>
+        <span class="day">6</span>
+        <span class="weekday">Thu 2026</span>
+      </div>
+      <div class="event-body">
+        <h3>Sam Lardner &amp; Barcelona at Sassafras Cafe</h3>
+        <div class="event-meta">
+          <span>Sassafras Cafe, Town Hill ME</span>
+          <span>Invite-only</span>
+          <span>Fundraiser</span>
+        </div>
+        <div class="event-tags">
+          <span class="tag invite">Invite-Only</span>
+          <span class="tag">Live Music</span>
+          <span class="tag">Infrastructure Fund</span>
+        </div>
+        <p>Top-supporter evening with Sam Lardner &amp; Barcelona (Hannah Semler's brother-in-law's band). Developed with Healthy Acadia via the Downeast Food Systems Partnership Fund. Pitch: infrastructure capacity for FarmDrop's Washington County expansion, including a delivery vehicle and driver to reach communities currently underserved.</p>
+        <div class="event-cta">
+          <a class="btn btn-primary" href="mailto:info@farmdrop.us?subject=Aug%206%20Sassafras%20event%20RSVP">Request Invite</a>
+          <a class="btn btn-secondary" href="https://healthyacadia.org" target="_blank" rel="noopener">Healthy Acadia</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="event-card">
+      <div class="event-date">
+        <span class="month">Ongoing</span>
+        <span class="day">2026</span>
+        <span class="weekday">Rolling</span>
+      </div>
+      <div class="event-body">
+        <h3>Downeast Food Systems Partnership Workshops</h3>
+        <div class="event-meta">
+          <span>Rolling throughout 2026</span>
+          <span>Multi-org collaborative</span>
+        </div>
+        <div class="event-tags">
+          <span class="tag">Workshop Series</span>
+          <span class="tag">Feasibility Planning</span>
+        </div>
+        <p>FarmDrop participates in the Downeast Food Systems Partnership alongside Healthy Acadia, Healthy Island Project, Friendship Cottage, Simmering Pot, Conscious Cafe, and Healthy Acadia Grange. Outputs: regional feasibility plan and concrete next steps for infrastructure supporting local food businesses and food security orgs.</p>
+        <div class="event-cta">
+          <a class="btn btn-primary" href="https://healthyacadia.org" target="_blank" rel="noopener">Healthy Acadia</a>
+          <a class="btn btn-secondary" href="https://farmdrop.us" target="_blank" rel="noopener">Get Involved</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="interview-block">
+      <div>
+        <h3>Listen: Hannah Semler on BCZ YapZ</h3>
+        <p>Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the spring and summer event lineup. Recorded April 22, 2026.</p>
+      </div>
+      <a class="btn" href="https://bettercallzaal.com/#yapz" target="_blank" rel="noopener">Watch Episode</a>
+    </div>
+
+    <section class="ffh-callout" id="ffh">
+      <h2>Food for Health — Three Ways to Give</h2>
+      <p>Formally launched in 2025 in response to SNAP reductions, Food for Health buys surplus from Maine farms and routes it through FarmDrop's existing delivery network to food security partner organizations across Downeast Maine. Three giving channels, all underexplained publicly:</p>
+      <div class="ffh-channels">
+        <div class="ffh-channel">
+          <strong>2% Auto-Reinvest</strong>
+          <p>Every FarmDrop order you place automatically routes 2% to Food for Health. You don't have to do anything. You just have to shop.</p>
+        </div>
+        <div class="ffh-channel">
+          <strong>Checkout Donation</strong>
+          <p>Add any amount at checkout — it goes straight to Food for Health. Fastest way to feed a neighbor this week.</p>
+        </div>
+        <div class="ffh-channel">
+          <strong>Buy-One-Donate-One</strong>
+          <p>Select items priced so that buying one for yourself also funds one for a food-insecure neighbor through FFH's partner orgs.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="partner-strip">
+      <h3>Food for Health Partner Organizations</h3>
+      <div class="partner-list">
+        <span class="partner-chip">Healthy Island Project (Deer Isle)</span>
+        <span class="partner-chip">Friendship Cottage (Blue Hill)</span>
+        <span class="partner-chip">Conscious Cafe (Ellsworth)</span>
+        <span class="partner-chip">Northern Maine Partners</span>
+      </div>
+    </div>
+
+    <div class="partner-strip">
+      <h3>FarmDrop Maine Markets</h3>
+      <div class="partner-list">
+        <span class="partner-chip">Blue Hill</span>
+        <span class="partner-chip">Mount Desert Island</span>
+        <span class="partner-chip">Deer Isle</span>
+        <span class="partner-chip">Midcoast</span>
+        <span class="partner-chip">Central Maine</span>
+        <span class="partner-chip">Waterville</span>
+        <span class="partner-chip">Lisbon</span>
+        <span class="partner-chip">Linneus</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <strong>FarmDrop</strong>
+        <p>Maine's mission-driven online farmers market. 65+ farm partners, 1,000+ customers, regional hubs across Maine.</p>
+      </div>
+      <div class="footer-col">
+        <strong>This Season</strong>
+        <ul>
+          <li>May 9 — Reversing Falls, Brooksville</li>
+          <li>May 23 — Ellsworth Public Library</li>
+          <li>May 24 — SoulBenders Benefit</li>
+          <li>Aug 6 — Sassafras Cafe (invite)</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <strong>Links</strong>
+        <ul>
+          <li><a href="https://farmdrop.us/" target="_blank" rel="noopener">farmdrop.us</a></li>
+          <li><a href="https://farmdrop.us/aboutus/" target="_blank" rel="noopener">About</a></li>
+          <li><a href="https://farmdrop.us/our-locations/" target="_blank" rel="noopener">Locations</a></li>
+          <li><a href="https://farmdrop.us/ffh-report/" target="_blank" rel="noopener">Food for Health Report</a></li>
+          <li><a href="https://bettercallzaal.com" target="_blank" rel="noopener">Events page by BetterCallZaal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>FarmDrop Events 2026 | Led by CEO Hannah Semler | Event page by BetterCallZaal</p>
+    </div>
+  </footer>
+</body>
+</html>

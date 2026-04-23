@@ -10,14 +10,28 @@
     body { background: var(--cream); }
 
     .home-hero {
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      background: linear-gradient(135deg, #3a3a3a 0%, #1f1f1f 100%);
       color: var(--white);
       padding: 4rem 2rem;
       text-align: center;
       border-radius: 12px;
       margin-bottom: 2.5rem;
       box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
     }
+    .home-hero::before {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 90%;
+      background: radial-gradient(ellipse at center top, rgba(189,214,49,0.22) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .home-hero > * { position: relative; z-index: 1; }
     .home-hero .eyebrow {
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -55,10 +69,10 @@
       transition: all 0.2s;
     }
     .btn-white {
-      background: var(--white);
+      background: var(--green);
       color: var(--green-dark);
     }
-    .btn-white:hover { background: var(--green-bg); }
+    .btn-white:hover { background: var(--green-light); color: var(--white); }
     .btn-outline {
       background: transparent;
       color: var(--white);
@@ -66,7 +80,8 @@
     }
     .btn-outline:hover {
       background: rgba(255,255,255,0.1);
-      border-color: var(--white);
+      border-color: var(--green);
+      color: var(--green);
     }
 
     .stats-strip {
@@ -237,8 +252,9 @@
 </head>
 <body>
   <header>
-    <div class="logo">FarmDrop</div>
-    <span class="logo-tagline">Maine's Online Farmers Market</span>
+    <a class="logo-link" href="index.html" aria-label="FarmDrop home">
+      <img class="logo-img" src="assets/farmdrop-logo.png" alt="FarmDrop">
+    </a>
     <nav>
       <a class="nav-btn active" href="index.html">Home</a>
       <a class="nav-btn" href="events.html">Events</a>

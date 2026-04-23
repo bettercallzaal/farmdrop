@@ -5,21 +5,23 @@
 }
 
 :root {
-  --green-dark: #2d5016;
-  --green: #4a7c23;
-  --green-light: #6ba339;
-  --green-bg: #f0f7e6;
-  --cream: #faf8f0;
-  --brown: #5c3d2e;
-  --brown-light: #8b6b4a;
-  --text: #2c2c2c;
+  --green-dark: #3a3a3a;
+  --green: #bdd631;
+  --green-light: #a8c024;
+  --green-bg: #f4f8d9;
+  --cream: #fafaf5;
+  --brown: #3a3a3a;
+  --brown-light: #666;
+  --text: #3a3a3a;
   --text-light: #666;
-  --border: #ddd;
+  --border: #e5e5e0;
   --white: #fff;
   --red: #c0392b;
   --orange: #e67e22;
   --blue: #2980b9;
   --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --brand-dark: #3a3a3a;
+  --brand-accent: #bdd631;
 }
 
 body {
@@ -31,28 +33,44 @@ body {
 
 /* Header */
 header {
-  background: var(--green-dark);
-  color: var(--white);
+  background: var(--white);
+  color: var(--green-dark);
   padding: 0 2rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  height: 60px;
+  height: 72px;
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+}
+
+.logo-img {
+  height: 48px;
+  width: auto;
+  display: block;
 }
 
 .logo {
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  color: var(--green-dark);
 }
 
 .logo-tagline {
   font-size: 0.75rem;
-  opacity: 0.7;
+  color: var(--text-light);
   white-space: nowrap;
+  font-weight: 500;
 }
 
 nav {
@@ -64,23 +82,27 @@ nav {
 .nav-btn {
   background: none;
   border: none;
-  color: rgba(255,255,255,0.7);
+  color: var(--text-light);
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-btn:hover {
-  background: rgba(255,255,255,0.1);
-  color: var(--white);
+  background: var(--green-bg);
+  color: var(--green-dark);
 }
 
 .nav-btn.active {
-  background: rgba(255,255,255,0.2);
-  color: var(--white);
-  font-weight: 600;
+  background: var(--green);
+  color: var(--green-dark);
+  font-weight: 700;
 }
 
 /* Main */

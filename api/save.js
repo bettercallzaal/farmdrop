@@ -48,20 +48,11 @@ module.exports = async function handler(req, res) {
       cacheControlMaxAge: 0
     });
     console.log('Blob saved at', blob.url, 'pathname=', blob.pathname);
-
-    // Clean up older blobs so list() doesn't accumulate forever
-    try {
-      const { blobs } = await list({ prefix: BLOB_PATHNAME, limit: 100 });
-      const olderUrls = (blobs || [])
-        .filter((b) => b.url !== blob.url)
-        .map((b) => b.url);
-      if (olderUrls.length > 0) {
-        await del(olderUrls);
-      }
-    } catch (cleanupErr) {
-      console.warn('Blob cleanup failed (non-fatal):', cleanupErr && cleanupErr.message);
-    }
-
+    // No cleanup here: deleting older blobs immediately after a put()
+    // races with /api/content's list() call. Blob list is eventually
+    // consistent, and deleting in the same request can make the just-saved
+    // blob temporarily invisible to reads. Clean up via /api/reset when
+    // it's time to tidy up.
     return res.status(200).json({ ok: true, url: blob.url });
   } catch (e) {
     console.error('Blob put failed:', e);

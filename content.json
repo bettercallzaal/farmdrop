@@ -25,9 +25,9 @@
     "step3_body": "Farmers deliver in bulk to a regional Market Hub Manager who packs individual orders. You pick up midweek at your location.",
     "step4_title": "Zero Waste",
     "step4_body": "Farmers only bring what is sold. Customers only get what is fresh-harvested that morning. Nothing spoils on shelves.",
-    "teaser_title": "Spring & Summer 2026 Events",
-    "teaser_body": "Two FarmDrop fundraisers for Food for Health (May 24 Soulbenders benefit, Aug 6 Sassafras invite-only), plus a couple of community events across Downeast Maine where you can find Hannah.",
-    "teaser_cta": "View Events",
+    "teaser_title": "Save the Date - May 24, 2026",
+    "teaser_body": "The Soulbenders play a benefit concert for FarmDrop's Food for Health program at The Grand in Ellsworth. Live music, local food, community - every dollar feeds a Maine neighbor.",
+    "teaser_cta": "See the Event",
     "markets_title": "FarmDrop Maine Markets"
   },
   "markets": [
@@ -41,37 +41,37 @@
     "Linneus"
   ],
   "hero": {
-    "eyebrow": "FarmDrop Spring & Summer 2026",
-    "title": "Gather. Eat. Build Maine's Food Future.",
-    "subtitle": "Two FarmDrop fundraisers for Food for Health, plus a couple of community gatherings around Downeast Maine where you can come say hi and talk local food systems with Hannah."
+    "eyebrow": "Save the Date - Sunday, May 24, 2026",
+    "title": "The Soulbenders Play for Food for Health.",
+    "subtitle": "One night at The Grand in Ellsworth. Live music, community, and every dollar goes to feed Maine neighbors facing food insecurity."
   },
   "intro_cards": {
-    "card1_value": "2",
-    "card1_label": "FarmDrop fundraisers",
-    "card2_value": "2",
-    "card2_label": "Community events we're joining",
-    "card3_value": "2%",
-    "card3_label": "Of every FarmDrop order to Food for Health",
-    "card4_value": "Since 2011",
-    "card4_label": "Community food work in Maine"
+    "card1_value": "May 24",
+    "card1_label": "Sunday night, one show",
+    "card2_value": "The Grand",
+    "card2_label": "Ellsworth, Maine",
+    "card3_value": "5-8 PM",
+    "card3_label": "Sliding-scale donation",
+    "card4_value": "100%",
+    "card4_label": "Proceeds to Food for Health"
   },
   "sections": {
-    "farmdrop_title": "FarmDrop Events",
-    "farmdrop_intro": "Two fundraisers to support Food for Health and the work of expanding Maine's farmer-to-table network.",
-    "community_title": "Find FarmDrop in the Community",
-    "community_intro": "FarmDrop is joining a few local gatherings this spring. Hannah Semler will be there to talk food systems, mutual aid, and how to support local farms. These are hosted by other organizations - come say hi."
+    "farmdrop_title": "Featured Event",
+    "farmdrop_intro": "A benefit concert for FarmDrop's Food for Health program - buying surplus from Maine farms and routing it to families hit by SNAP cuts.",
+    "community_title": "",
+    "community_intro": ""
   },
   "events": {
     "may24": {
       "month": "May",
       "day": "24",
       "weekday": "Sun 2026",
-      "title": "Soulbenders Benefit for Food for Health",
-      "location": "Venue TBC (Blue Hill / Ellsworth area)",
+      "title": "The Soulbenders Benefit Concert",
+      "location": "The Grand, Ellsworth ME",
       "time": "5-8 PM",
       "admission": "Sliding-scale donation",
       "tags": "Featured, Benefit, Live Music, Dance Party",
-      "description": "The Soulbenders play a fundraiser for FarmDrop's Food for Health program. Afternoon conversation on community food systems and mutual aid, partner-org tabling, and a dance party to close. Every dollar goes to Food for Health - buying surplus from Maine farms and routing it to families hit by SNAP cuts. Come hungry, come dancing.",
+      "description": "The Soulbenders play a benefit for FarmDrop's Food for Health program. Afternoon conversation on community food systems and mutual aid, partner-org tabling, and a dance party to close. Every dollar goes to Food for Health - buying surplus from Maine farms and routing it to families hit by SNAP cuts. Come hungry, come dancing.",
       "primary_label": "RSVP / Donate",
       "primary_url": "https://farmdrop.us/ffh-report/",
       "secondary_label": "About the Soulbenders",

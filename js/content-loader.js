@@ -1,6 +1,6 @@
 (async function () {
   try {
-    const res = await fetch('/content.json?v=' + Date.now(), { cache: 'no-store' });
+    const res = await fetch('/api/content?v=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) return;
     const content = await res.json();
 

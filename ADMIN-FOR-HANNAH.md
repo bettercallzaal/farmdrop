@@ -16,10 +16,10 @@ Stats like "65+ farm partners", the logo, the brand colors, and the home page st
 
 1. Edit any field in the form.
 2. Click **Save and Publish** at the bottom.
-3. You'll see "Saved. Site redeploys in about 30 seconds."
-4. Refresh the events page after ~30 seconds. Your changes are live.
+3. You'll see "Saved. Changes are live now."
+4. Refresh the events page - your changes are already there.
 
-That redeploy also pushes to the farmdrop.us events embed (if Jess has wired it in).
+The farmdrop.us events embed reads the same data, so your edit shows up there too automatically.
 
 ## Tips
 
@@ -35,4 +35,4 @@ Click **Sign out** in the top right. Closing the tab also clears your session.
 
 - **"Wrong password"**: double check. Zaal can reset if needed.
 - **"Save failed"**: network blip, try again. If it keeps failing, text Zaal.
-- **Your edit didn't show up on the events page**: wait a full minute for the rebuild, then hard refresh (`Cmd+Shift+R`).
+- **Your edit didn't show up on the events page**: hard refresh (`Cmd+Shift+R`). If it's still stuck, text Zaal.

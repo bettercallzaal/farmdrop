@@ -41,9 +41,11 @@ module.exports = async function handler(req, res) {
     const blob = await put(BLOB_PATHNAME, json, {
       access: 'public',
       allowOverwrite: true,
+      addRandomSuffix: false,
       contentType: 'application/json; charset=utf-8',
       cacheControlMaxAge: 0
     });
+    console.log('Blob saved at', blob.url);
     return res.status(200).json({ ok: true, url: blob.url });
   } catch (e) {
     console.error('Blob put failed:', e);

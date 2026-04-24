@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FarmDrop Admin - Edit Content</title>
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    :root {
+      --dark: #3a3a3a;
+      --accent: #bdd631;
+      --accent-dark: #a8c024;
+      --bg: #fafaf5;
+      --border: #e5e5e0;
+      --text-muted: #666;
+      --red: #c0392b;
+      --green-ok: #4a7c23;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.5;
+      padding-bottom: 4rem;
+    }
+    header {
+      background: #fff;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    header h1 {
+      font-size: 1.1rem;
+      color: var(--dark);
+    }
+    header .actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .btn {
+      background: var(--accent);
+      color: var(--dark);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover { background: var(--accent-dark); color: #fff; }
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .btn.ghost:hover { background: var(--bg); color: var(--dark); }
+    main {
+      max-width: 860px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .login-card, .section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .login-card {
+      max-width: 420px;
+      margin: 5rem auto;
+    }
+    h2 {
+      color: var(--dark);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+    }
+    h3 {
+      color: var(--dark);
+      font-size: 1rem;
+      margin: 1.25rem 0 0.5rem;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin: 0.75rem 0 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--dark);
+      background: #fff;
+    }
+    textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(189,214,49,0.2);
+    }
+    .event-card-edit {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .event-card-edit h3 {
+      margin-top: 0;
+      color: var(--accent-dark);
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1rem;
+    }
+    .status {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(6rem);
+      background: var(--dark);
+      color: #fff;
+      padding: 0.9rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 20;
+      transition: transform 0.3s ease;
+      max-width: 90vw;
+      text-align: center;
+    }
+    .status.show { transform: translateX(-50%) translateY(0); }
+    .status.ok { background: var(--green-ok); }
+    .status.err { background: var(--red); }
+    .hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    .sticky-bar {
+      position: sticky;
+      bottom: 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 1rem 2rem;
+      margin: 2rem -1.5rem -4rem;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+      align-items: center;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+    }
+    .hidden { display: none !important; }
+    .preview-link {
+      color: var(--accent-dark);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: auto;
+    }
+    .preview-link:hover { text-decoration: underline; }
+    @media (max-width: 600px) {
+      main { padding: 0 1rem; }
+      .two-col { grid-template-columns: 1fr; }
+      header { padding: 0.75rem 1rem; }
+      header h1 { font-size: 0.95rem; }
+      .sticky-bar { padding: 1rem; margin: 2rem -1rem -4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>FarmDrop Content Editor</h1>
+    <div class="actions" id="header-actions"></div>
+  </header>
+
+  <main>
+    <div id="login" class="login-card">
+      <h2>Sign In</h2>
+      <p style="color:var(--text-muted); margin-bottom:1rem;">Enter the editor password to unlock.</p>
+      <label for="password-input">Password</label>
+      <input id="password-input" type="password" autocomplete="current-password" placeholder="Enter password" />
+      <div style="margin-top: 1rem;">
+        <button class="btn" id="login-btn">Unlock Editor</button>
+      </div>
+      <p id="login-error" class="hint" style="color:var(--red); margin-top:0.75rem; min-height:1rem;"></p>
+    </div>
+
+    <div id="editor" class="hidden">
+      <div class="section">
+        <h2>Page Header</h2>
+        <label>Eyebrow (small caps above heading)</label>
+        <input type="text" data-path="hero.eyebrow" />
+        <label>Main Headline</label>
+        <input type="text" data-path="hero.title" />
+        <label>Subheading Paragraph</label>
+        <textarea data-path="hero.subtitle"></textarea>
+      </div>
+
+      <div class="section">
+        <h2>Section Headings</h2>
+        <h3>FarmDrop Events section</h3>
+        <label>Section title</label>
+        <input type="text" data-path="sections.farmdrop_title" />
+        <label>Section intro sentence</label>
+        <textarea data-path="sections.farmdrop_intro"></textarea>
+
+        <h3>Community Events section</h3>
+        <label>Section title</label>
+        <input type="text" data-path="sections.community_title" />
+        <label>Section intro sentence</label>
+        <textarea data-path="sections.community_intro"></textarea>
+      </div>
+
+      <div class="section">
+        <h2>FarmDrop Fundraisers</h2>
+
+        <div class="event-card-edit">
+          <h3>May 24 - Soulbenders Benefit</h3>
+          <label>Title</label>
+          <input type="text" data-path="events.may24.title" />
+          <div class="two-col">
+            <div>
+              <label>Location</label>
+              <input type="text" data-path="events.may24.location" />
+            </div>
+            <div>
+              <label>Time</label>
+              <input type="text" data-path="events.may24.time" />
+            </div>
+          </div>
+          <label>Admission / Price</label>
+          <input type="text" data-path="events.may24.admission" />
+          <label>Description</label>
+          <textarea data-path="events.may24.description"></textarea>
+          <div class="two-col">
+            <div>
+              <label>Primary button label</label>
+              <input type="text" data-path="events.may24.primary_label" />
+            </div>
+            <div>
+              <label>Primary button URL</label>
+              <input type="url" data-path="events.may24.primary_url" />
+            </div>
+            <div>
+              <label>Secondary button label (blank to hide)</label>
+              <input type="text" data-path="events.may24.secondary_label" />
+            </div>
+            <div>
+              <label>Secondary button URL</label>
+              <input type="url" data-path="events.may24.secondary_url" />
+            </div>
+          </div>
+        </div>
+
+        <div class="event-card-edit">
+          <h3>Aug 6 - Sassafras Cafe (invite-only)</h3>
+          <label>Title</label>
+          <input type="text" data-path="events.aug6.title" />
+          <div class="two-col">
+            <div>
+              <label>Location</label>
+              <input type="text" data-path="events.aug6.location" />
+            </div>
+            <div>
+              <label>Time</label>
+              <input type="text" data-path="events.aug6.time" />
+            </div>
+          </div>
+          <label>Admission / Price</label>
+          <input type="text" data-path="events.aug6.admission" />
+          <label>Description</label>
+          <textarea data-path="events.aug6.description"></textarea>
+          <div class="two-col">
+            <div>
+              <label>Primary button label</label>
+              <input type="text" data-path="events.aug6.primary_label" />
+            </div>
+            <div>
+              <label>Primary button URL</label>
+              <input type="url" data-path="events.aug6.primary_url" />
+            </div>
+            <div>
+              <label>Secondary button label</label>
+              <input type="text" data-path="events.aug6.secondary_label" />
+            </div>
+            <div>
+              <label>Secondary button URL</label>
+              <input type="url" data-path="events.aug6.secondary_url" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Community Events FarmDrop Is Joining</h2>
+
+        <div class="event-card-edit">
+          <h3>May 9 - Reversing Falls</h3>
+          <label>Title</label>
+          <input type="text" data-path="events.may9.title" />
+          <div class="two-col">
+            <div>
+              <label>Location</label>
+              <input type="text" data-path="events.may9.location" />
+            </div>
+            <div>
+              <label>Admission / Price</label>
+              <input type="text" data-path="events.may9.admission" />
+            </div>
+          </div>
+          <label>Description</label>
+          <textarea data-path="events.may9.description"></textarea>
+          <div class="two-col">
+            <div>
+              <label>Primary button label</label>
+              <input type="text" data-path="events.may9.primary_label" />
+            </div>
+            <div>
+              <label>Primary button URL</label>
+              <input type="url" data-path="events.may9.primary_url" />
+            </div>
+          </div>
+        </div>
+
+        <div class="event-card-edit">
+          <h3>May 23 - Ellsworth Public Library</h3>
+          <label>Title</label>
+          <input type="text" data-path="events.may23.title" />
+          <div class="two-col">
+            <div>
+              <label>Location</label>
+              <input type="text" data-path="events.may23.location" />
+            </div>
+            <div>
+              <label>Admission / Price</label>
+              <input type="text" data-path="events.may23.admission" />
+            </div>
+          </div>
+          <label>Description</label>
+          <textarea data-path="events.may23.description"></textarea>
+          <div class="two-col">
+            <div>
+              <label>Primary button label</label>
+              <input type="text" data-path="events.may23.primary_label" />
+            </div>
+            <div>
+              <label>Primary button URL</label>
+              <input type="url" data-path="events.may23.primary_url" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Food for Health Section</h2>
+        <label>Headline</label>
+        <input type="text" data-path="ffh.title" />
+        <label>Intro paragraph</label>
+        <textarea data-path="ffh.intro"></textarea>
+        <div class="two-col">
+          <div>
+            <label>Channel 1 title</label>
+            <input type="text" data-path="ffh.ch1_title" />
+          </div>
+          <div>
+            <label>Channel 1 body</label>
+            <textarea data-path="ffh.ch1_body"></textarea>
+          </div>
+          <div>
+            <label>Channel 2 title</label>
+            <input type="text" data-path="ffh.ch2_title" />
+          </div>
+          <div>
+            <label>Channel 2 body</label>
+            <textarea data-path="ffh.ch2_body"></textarea>
+          </div>
+          <div>
+            <label>Channel 3 title</label>
+            <input type="text" data-path="ffh.ch3_title" />
+          </div>
+          <div>
+            <label>Channel 3 body</label>
+            <textarea data-path="ffh.ch3_body"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>BCZ YapZ Interview Block</h2>
+        <label>Title</label>
+        <input type="text" data-path="interview.title" />
+        <label>Blurb</label>
+        <textarea data-path="interview.blurb"></textarea>
+        <label>Watch link URL</label>
+        <input type="url" data-path="interview.url" />
+      </div>
+
+      <div class="sticky-bar">
+        <a class="preview-link" href="events.html" target="_blank" rel="noopener">View live events page in new tab</a>
+        <button class="btn ghost" id="reload-btn">Reload from live</button>
+        <button class="btn" id="save-btn">Save &amp; Publish</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="status" id="status"></div>
+
+  <script>
+    const loginEl = document.getElementById('login');
+    const editorEl = document.getElementById('editor');
+    const passwordInput = document.getElementById('password-input');
+    const loginBtn = document.getElementById('login-btn');
+    const loginError = document.getElementById('login-error');
+    const saveBtn = document.getElementById('save-btn');
+    const reloadBtn = document.getElementById('reload-btn');
+    const headerActions = document.getElementById('header-actions');
+    const statusEl = document.getElementById('status');
+
+    let content = null;
+    let password = '';
+    const PASSWORD_KEY = 'farmdrop_admin_pw';
+
+    function showStatus(msg, kind) {
+      statusEl.textContent = msg;
+      statusEl.className = 'status show ' + (kind || '');
+      setTimeout(() => { statusEl.className = 'status ' + (kind || ''); }, 3000);
+    }
+
+    function resolve(obj, path) {
+      return path.split('.').reduce((a, k) => (a == null ? undefined : a[k]), obj);
+    }
+
+    function setByPath(obj, path, value) {
+      const keys = path.split('.');
+      let cur = obj;
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (cur[keys[i]] == null) cur[keys[i]] = {};
+        cur = cur[keys[i]];
+      }
+      cur[keys[keys.length - 1]] = value;
+    }
+
+    function populateForm() {
+      document.querySelectorAll('[data-path]').forEach((el) => {
+        const val = resolve(content, el.dataset.path);
+        el.value = val == null ? '' : val;
+      });
+    }
+
+    function gatherForm() {
+      document.querySelectorAll('[data-path]').forEach((el) => {
+        setByPath(content, el.dataset.path, el.value);
+      });
+    }
+
+    async function loadContent() {
+      const res = await fetch('/content.json?v=' + Date.now(), { cache: 'no-store' });
+      if (!res.ok) throw new Error('Failed to load content');
+      content = await res.json();
+      populateForm();
+    }
+
+    async function unlock() {
+      const pw = passwordInput.value.trim();
+      if (!pw) {
+        loginError.textContent = 'Enter a password.';
+        return;
+      }
+      loginError.textContent = '';
+      try {
+        const res = await fetch('/api/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw })
+        });
+        if (!res.ok) {
+          const txt = await res.text();
+          loginError.textContent = 'Wrong password.';
+          return;
+        }
+        password = pw;
+        sessionStorage.setItem(PASSWORD_KEY, pw);
+        await loadContent();
+        loginEl.classList.add('hidden');
+        editorEl.classList.remove('hidden');
+        headerActions.innerHTML = '<button class="btn ghost" id="logout-btn">Sign out</button>';
+        document.getElementById('logout-btn').onclick = logout;
+      } catch (e) {
+        loginError.textContent = 'Sign in failed. Try again.';
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem(PASSWORD_KEY);
+      location.reload();
+    }
+
+    async function save() {
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+      try {
+        gatherForm();
+        const res = await fetch('/api/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password, content })
+        });
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error(txt || 'Save failed');
+        }
+        showStatus('Saved. Site redeploys in ~30 seconds.', 'ok');
+      } catch (e) {
+        showStatus('Error: ' + e.message, 'err');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save & Publish';
+      }
+    }
+
+    loginBtn.onclick = unlock;
+    passwordInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') unlock(); });
+    saveBtn.onclick = save;
+    reloadBtn.onclick = async () => {
+      reloadBtn.disabled = true;
+      reloadBtn.textContent = 'Reloading...';
+      try { await loadContent(); showStatus('Reloaded from live.', 'ok'); }
+      catch { showStatus('Reload failed.', 'err'); }
+      reloadBtn.disabled = false;
+      reloadBtn.textContent = 'Reload from live';
+    };
+
+    // Auto-login if password cached this session
+    const cached = sessionStorage.getItem(PASSWORD_KEY);
+    if (cached) {
+      passwordInput.value = cached;
+      unlock();
+    }
+  </script>
+</body>
+</html>

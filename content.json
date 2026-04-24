@@ -1,0 +1,74 @@
+{
+  "hero": {
+    "eyebrow": "FarmDrop Spring & Summer 2026",
+    "title": "Gather. Eat. Build Maine's Food Future.",
+    "subtitle": "Two FarmDrop fundraisers for Food for Health, plus a couple of community gatherings around Downeast Maine where you can come say hi and talk local food systems with Hannah."
+  },
+  "sections": {
+    "farmdrop_title": "FarmDrop Events",
+    "farmdrop_intro": "Two fundraisers to support Food for Health and the work of expanding Maine's farmer-to-table network.",
+    "community_title": "Find FarmDrop in the Community",
+    "community_intro": "FarmDrop is joining a few local gatherings this spring. Hannah Semler will be there to talk food systems, mutual aid, and how to support local farms. These are hosted by other organizations - come say hi."
+  },
+  "events": {
+    "may24": {
+      "title": "Soulbenders Benefit for Food for Health",
+      "location": "Venue TBC (Blue Hill / Ellsworth area)",
+      "time": "5-8 PM",
+      "admission": "Sliding-scale donation",
+      "description": "The Soulbenders play a fundraiser for FarmDrop's Food for Health program. Afternoon conversation on community food systems and mutual aid, partner-org tabling, and a dance party to close. Every dollar goes to Food for Health - buying surplus from Maine farms and routing it to families hit by SNAP cuts. Come hungry, come dancing.",
+      "primary_label": "RSVP / Donate",
+      "primary_url": "https://farmdrop.us/ffh-report/",
+      "secondary_label": "About the Soulbenders",
+      "secondary_url": "https://thesoulbenders.com"
+    },
+    "aug6": {
+      "title": "Sam Lardner & Barcelona at Sassafras Cafe",
+      "location": "Sassafras Cafe, Town Hill ME",
+      "time": "Invite-only",
+      "admission": "Fundraiser",
+      "description": "A top-supporter evening with Sam Lardner & Barcelona. FarmDrop is raising funds for the infrastructure it takes to reach more Maine communities - vehicles, drivers, and cold storage to expand service into Washington County and beyond.",
+      "primary_label": "Request Invite",
+      "primary_url": "mailto:info@farmdrop.us?subject=Aug%206%20Sassafras%20event%20RSVP",
+      "secondary_label": "FarmDrop",
+      "secondary_url": "https://farmdrop.us"
+    },
+    "may9": {
+      "title": "Community Solutions Conversation",
+      "location": "Reversing Falls Sanctuary, Brooksville ME",
+      "time": "",
+      "admission": "Free, open to public",
+      "description": "A community conversation on mutual aid and food systems in Downeast Maine, hosted by Reversing Falls Sanctuary. Hannah Semler will speak on behalf of FarmDrop alongside other local organizations.",
+      "primary_label": "Event Info",
+      "primary_url": "https://www.reversingfalls.org/events-1",
+      "secondary_label": "",
+      "secondary_url": ""
+    },
+    "may23": {
+      "title": "Grocery List Documentary Screening",
+      "location": "Ellsworth Public Library, Ellsworth ME",
+      "time": "",
+      "admission": "Free, open to public",
+      "description": "A documentary screening hosted by Ellsworth Public Library as part of the Indie Lens Pop-Up series. FarmDrop will be on hand for the conversation afterward about where our food comes from and how local networks can replace long supply chains.",
+      "primary_label": "Library Info",
+      "primary_url": "https://ellsworthlibrary.net",
+      "secondary_label": "",
+      "secondary_url": ""
+    }
+  },
+  "ffh": {
+    "title": "Food for Health - Three Ways to Give",
+    "intro": "Formally launched in 2025 in response to SNAP reductions, Food for Health buys surplus from Maine farms and routes it through FarmDrop's existing delivery network to food security partner organizations across Downeast Maine. Three giving channels:",
+    "ch1_title": "2% Auto-Reinvest",
+    "ch1_body": "Every FarmDrop order you place automatically routes 2% to Food for Health. You don't have to do anything. You just have to shop.",
+    "ch2_title": "Checkout Donation",
+    "ch2_body": "Add any amount at checkout - it goes straight to Food for Health. Fastest way to feed a neighbor this week.",
+    "ch3_title": "Buy-One-Donate-One",
+    "ch3_body": "Select items priced so that buying one for yourself also funds one for a food-insecure neighbor through FFH's partner orgs."
+  },
+  "interview": {
+    "title": "Listen: Hannah Semler on BCZ YapZ",
+    "blurb": "Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the spring and summer event lineup. Recorded April 22, 2026.",
+    "url": "https://bettercallzaal.com/#yapz"
+  }
+}

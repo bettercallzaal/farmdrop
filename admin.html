@@ -10,6 +10,7 @@
       --dark: #3a3a3a;
       --accent: #bdd631;
       --accent-dark: #a8c024;
+      --accent-bg: #f4f8d9;
       --bg: #fafaf5;
       --border: #e5e5e0;
       --text-muted: #666;
@@ -22,7 +23,7 @@
       background: var(--bg);
       color: var(--dark);
       line-height: 1.5;
-      padding-bottom: 4rem;
+      padding-bottom: 5rem;
     }
     header {
       background: #fff;
@@ -36,15 +37,8 @@
       z-index: 10;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    header h1 {
-      font-size: 1.1rem;
-      color: var(--dark);
-    }
-    header .actions {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
+    header h1 { font-size: 1.1rem; }
+    header .actions { display: flex; gap: 0.5rem; align-items: center; }
     .btn {
       background: var(--accent);
       color: var(--dark);
@@ -65,58 +59,82 @@
       font-weight: 500;
     }
     .btn.ghost:hover { background: var(--bg); color: var(--dark); }
-    main {
-      max-width: 860px;
-      margin: 2rem auto;
-      padding: 0 1.5rem;
-    }
+    main { max-width: 880px; margin: 1.5rem auto; padding: 0 1.25rem; }
+
     .login-card, .section {
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .login-card {
-      max-width: 420px;
-      margin: 5rem auto;
+    .login-card { max-width: 420px; margin: 5rem auto; }
+
+    /* Collapsible sections */
+    details.section { padding: 0; overflow: hidden; }
+    details.section > summary {
+      cursor: pointer;
+      padding: 1rem 1.75rem;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
     }
+    details.section > summary::-webkit-details-marker { display: none; }
+    details.section > summary::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+    details.section[open] > summary::after { content: '-'; }
+    details.section > summary h2 {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    details.section .section-body {
+      padding: 0 1.75rem 1.5rem;
+    }
+
     h2 {
       color: var(--dark);
-      font-size: 1.3rem;
-      margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--accent);
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
     }
     h3 {
-      color: var(--dark);
-      font-size: 1rem;
+      color: var(--accent-dark);
+      font-size: 0.95rem;
       margin: 1.25rem 0 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: var(--text-muted);
-      margin: 0.75rem 0 0.3rem;
+      margin: 0.65rem 0 0.3rem;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
     }
     input[type="text"],
     input[type="password"],
     input[type="url"],
     textarea {
       width: 100%;
-      padding: 0.7rem 0.9rem;
+      padding: 0.6rem 0.85rem;
       border: 1px solid var(--border);
       border-radius: 6px;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-family: inherit;
       color: var(--dark);
       background: #fff;
     }
-    textarea { min-height: 100px; resize: vertical; line-height: 1.5; }
+    textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
     input:focus, textarea:focus {
       outline: none;
       border-color: var(--accent);
@@ -126,17 +144,21 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 1.25rem;
-      margin-top: 1rem;
+      padding: 1.1rem 1.25rem;
+      margin-top: 0.8rem;
     }
-    .event-card-edit h3 {
-      margin-top: 0;
-      color: var(--accent-dark);
-    }
-    .two-col {
+    .event-card-edit h3 { margin-top: 0; }
+    .three-col, .two-col {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem 1rem;
+      gap: 0.25rem 0.75rem;
+    }
+    .three-col { grid-template-columns: 1fr 1fr 1fr; }
+    .two-col { grid-template-columns: 1fr 1fr; }
+    .tag-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+      font-style: italic;
     }
     .status {
       position: fixed;
@@ -157,22 +179,19 @@
     .status.show { transform: translateX(-50%) translateY(0); }
     .status.ok { background: var(--green-ok); }
     .status.err { background: var(--red); }
-    .hint {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
     .sticky-bar {
-      position: sticky;
+      position: fixed;
       bottom: 0;
+      left: 0;
+      right: 0;
       background: #fff;
       border-top: 1px solid var(--border);
-      padding: 1rem 2rem;
-      margin: 2rem -1.5rem -4rem;
+      padding: 0.85rem 1.5rem;
       display: flex;
-      gap: 0.75rem;
+      gap: 0.6rem;
       justify-content: flex-end;
       align-items: center;
+      z-index: 15;
       box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
     }
     .hidden { display: none !important; }
@@ -180,16 +199,21 @@
       color: var(--accent-dark);
       text-decoration: none;
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       margin-right: auto;
     }
     .preview-link:hover { text-decoration: underline; }
-    @media (max-width: 600px) {
-      main { padding: 0 1rem; }
-      .two-col { grid-template-columns: 1fr; }
+    .hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+    @media (max-width: 640px) {
+      main { padding: 0 0.75rem; }
+      .three-col, .two-col { grid-template-columns: 1fr; }
       header { padding: 0.75rem 1rem; }
       header h1 { font-size: 0.95rem; }
-      .sticky-bar { padding: 1rem; margin: 2rem -1rem -4rem; }
+      details.section > summary, details.section .section-body { padding-left: 1rem; padding-right: 1rem; }
     }
   </style>
 </head>
@@ -202,238 +226,495 @@
   <main>
     <div id="login" class="login-card">
       <h2>Sign In</h2>
-      <p style="color:var(--text-muted); margin-bottom:1rem;">Enter the editor password to unlock.</p>
+      <p style="color:var(--text-muted); margin-bottom:1rem; font-size:0.9rem;">Enter the editor password to unlock.</p>
       <label for="password-input">Password</label>
-      <input id="password-input" type="password" autocomplete="current-password" placeholder="Enter password" />
+      <input id="password-input" type="password" autocomplete="current-password" placeholder="Password" />
       <div style="margin-top: 1rem;">
-        <button class="btn" id="login-btn">Unlock Editor</button>
+        <button class="btn" id="login-btn">Unlock</button>
       </div>
       <p id="login-error" class="hint" style="color:var(--red); margin-top:0.75rem; min-height:1rem;"></p>
     </div>
 
     <div id="editor" class="hidden">
-      <div class="section">
-        <h2>Page Header</h2>
-        <label>Eyebrow (small caps above heading)</label>
-        <input type="text" data-path="hero.eyebrow" />
-        <label>Main Headline</label>
-        <input type="text" data-path="hero.title" />
-        <label>Subheading Paragraph</label>
-        <textarea data-path="hero.subtitle"></textarea>
-      </div>
 
-      <div class="section">
-        <h2>Section Headings</h2>
-        <h3>FarmDrop Events section</h3>
-        <label>Section title</label>
-        <input type="text" data-path="sections.farmdrop_title" />
-        <label>Section intro sentence</label>
-        <textarea data-path="sections.farmdrop_intro"></textarea>
+      <!-- ============ HOME PAGE ============ -->
+      <details class="section" open>
+        <summary><h2>Home Page</h2></summary>
+        <div class="section-body">
 
-        <h3>Community Events section</h3>
-        <label>Section title</label>
-        <input type="text" data-path="sections.community_title" />
-        <label>Section intro sentence</label>
-        <textarea data-path="sections.community_intro"></textarea>
-      </div>
-
-      <div class="section">
-        <h2>FarmDrop Fundraisers</h2>
-
-        <div class="event-card-edit">
-          <h3>May 24 - Soulbenders Benefit</h3>
-          <label>Title</label>
-          <input type="text" data-path="events.may24.title" />
-          <div class="two-col">
-            <div>
-              <label>Location</label>
-              <input type="text" data-path="events.may24.location" />
-            </div>
-            <div>
-              <label>Time</label>
-              <input type="text" data-path="events.may24.time" />
-            </div>
-          </div>
-          <label>Admission / Price</label>
-          <input type="text" data-path="events.may24.admission" />
-          <label>Description</label>
-          <textarea data-path="events.may24.description"></textarea>
+          <h3>Hero</h3>
+          <label>Eyebrow (small caps above headline)</label>
+          <input type="text" data-path="home.hero_eyebrow" />
+          <label>Main headline</label>
+          <input type="text" data-path="home.hero_title" />
+          <label>Subheading paragraph</label>
+          <textarea data-path="home.hero_subtitle"></textarea>
           <div class="two-col">
             <div>
               <label>Primary button label</label>
-              <input type="text" data-path="events.may24.primary_label" />
+              <input type="text" data-path="home.hero_cta1_label" />
             </div>
             <div>
               <label>Primary button URL</label>
-              <input type="url" data-path="events.may24.primary_url" />
-            </div>
-            <div>
-              <label>Secondary button label (blank to hide)</label>
-              <input type="text" data-path="events.may24.secondary_label" />
-            </div>
-            <div>
-              <label>Secondary button URL</label>
-              <input type="url" data-path="events.may24.secondary_url" />
-            </div>
-          </div>
-        </div>
-
-        <div class="event-card-edit">
-          <h3>Aug 6 - Sassafras Cafe (invite-only)</h3>
-          <label>Title</label>
-          <input type="text" data-path="events.aug6.title" />
-          <div class="two-col">
-            <div>
-              <label>Location</label>
-              <input type="text" data-path="events.aug6.location" />
-            </div>
-            <div>
-              <label>Time</label>
-              <input type="text" data-path="events.aug6.time" />
-            </div>
-          </div>
-          <label>Admission / Price</label>
-          <input type="text" data-path="events.aug6.admission" />
-          <label>Description</label>
-          <textarea data-path="events.aug6.description"></textarea>
-          <div class="two-col">
-            <div>
-              <label>Primary button label</label>
-              <input type="text" data-path="events.aug6.primary_label" />
-            </div>
-            <div>
-              <label>Primary button URL</label>
-              <input type="url" data-path="events.aug6.primary_url" />
+              <input type="url" data-path="home.hero_cta1_url" />
             </div>
             <div>
               <label>Secondary button label</label>
-              <input type="text" data-path="events.aug6.secondary_label" />
+              <input type="text" data-path="home.hero_cta2_label" />
             </div>
             <div>
               <label>Secondary button URL</label>
-              <input type="url" data-path="events.aug6.secondary_url" />
+              <input type="url" data-path="home.hero_cta2_url" />
+            </div>
+          </div>
+
+          <h3>Stats Row (4 tiles)</h3>
+          <div class="two-col">
+            <div>
+              <label>Stat 1 value (e.g. 65+)</label>
+              <input type="text" data-path="home.stat1_value" />
+            </div>
+            <div>
+              <label>Stat 1 label</label>
+              <input type="text" data-path="home.stat1_label" />
+            </div>
+            <div>
+              <label>Stat 2 value</label>
+              <input type="text" data-path="home.stat2_value" />
+            </div>
+            <div>
+              <label>Stat 2 label</label>
+              <input type="text" data-path="home.stat2_label" />
+            </div>
+            <div>
+              <label>Stat 3 value</label>
+              <input type="text" data-path="home.stat3_value" />
+            </div>
+            <div>
+              <label>Stat 3 label</label>
+              <input type="text" data-path="home.stat3_label" />
+            </div>
+            <div>
+              <label>Stat 4 value</label>
+              <input type="text" data-path="home.stat4_value" />
+            </div>
+            <div>
+              <label>Stat 4 label</label>
+              <input type="text" data-path="home.stat4_label" />
+            </div>
+          </div>
+
+          <h3>How FarmDrop Works Section</h3>
+          <label>Section title</label>
+          <input type="text" data-path="home.how_title" />
+          <label>Intro line under title</label>
+          <input type="text" data-path="home.how_intro" />
+          <div class="two-col">
+            <div>
+              <label>Step 1 title</label>
+              <input type="text" data-path="home.step1_title" />
+            </div>
+            <div>
+              <label>Step 1 body</label>
+              <textarea data-path="home.step1_body"></textarea>
+            </div>
+            <div>
+              <label>Step 2 title</label>
+              <input type="text" data-path="home.step2_title" />
+            </div>
+            <div>
+              <label>Step 2 body</label>
+              <textarea data-path="home.step2_body"></textarea>
+            </div>
+            <div>
+              <label>Step 3 title</label>
+              <input type="text" data-path="home.step3_title" />
+            </div>
+            <div>
+              <label>Step 3 body</label>
+              <textarea data-path="home.step3_body"></textarea>
+            </div>
+            <div>
+              <label>Step 4 title</label>
+              <input type="text" data-path="home.step4_title" />
+            </div>
+            <div>
+              <label>Step 4 body</label>
+              <textarea data-path="home.step4_body"></textarea>
+            </div>
+          </div>
+
+          <h3>Events Teaser (the "See Events" banner)</h3>
+          <label>Teaser title</label>
+          <input type="text" data-path="home.teaser_title" />
+          <label>Teaser body</label>
+          <textarea data-path="home.teaser_body"></textarea>
+          <label>Button label</label>
+          <input type="text" data-path="home.teaser_cta" />
+
+          <h3>Markets Section</h3>
+          <label>Section heading</label>
+          <input type="text" data-path="home.markets_title" />
+          <label>Markets list (one market per line)</label>
+          <textarea data-path="__markets_text" rows="9" placeholder="Blue Hill&#10;Mount Desert Island&#10;..."></textarea>
+          <p class="tag-hint">One market name per line. Add, remove, or reorder freely.</p>
+
+        </div>
+      </details>
+
+      <!-- ============ EVENTS PAGE HERO + INTRO ============ -->
+      <details class="section">
+        <summary><h2>Events Page - Hero &amp; Intro Tiles</h2></summary>
+        <div class="section-body">
+          <h3>Hero</h3>
+          <label>Eyebrow (small caps above headline)</label>
+          <input type="text" data-path="hero.eyebrow" />
+          <label>Main headline</label>
+          <input type="text" data-path="hero.title" />
+          <label>Subheading paragraph</label>
+          <textarea data-path="hero.subtitle"></textarea>
+
+          <h3>Intro Tiles (the 4 stat cards under hero)</h3>
+          <div class="two-col">
+            <div>
+              <label>Tile 1 value</label>
+              <input type="text" data-path="intro_cards.card1_value" />
+            </div>
+            <div>
+              <label>Tile 1 label</label>
+              <input type="text" data-path="intro_cards.card1_label" />
+            </div>
+            <div>
+              <label>Tile 2 value</label>
+              <input type="text" data-path="intro_cards.card2_value" />
+            </div>
+            <div>
+              <label>Tile 2 label</label>
+              <input type="text" data-path="intro_cards.card2_label" />
+            </div>
+            <div>
+              <label>Tile 3 value</label>
+              <input type="text" data-path="intro_cards.card3_value" />
+            </div>
+            <div>
+              <label>Tile 3 label</label>
+              <input type="text" data-path="intro_cards.card3_label" />
+            </div>
+            <div>
+              <label>Tile 4 value</label>
+              <input type="text" data-path="intro_cards.card4_value" />
+            </div>
+            <div>
+              <label>Tile 4 label</label>
+              <input type="text" data-path="intro_cards.card4_label" />
+            </div>
+          </div>
+
+          <h3>Section Headings</h3>
+          <label>FarmDrop Events section title</label>
+          <input type="text" data-path="sections.farmdrop_title" />
+          <label>FarmDrop Events section intro</label>
+          <textarea data-path="sections.farmdrop_intro"></textarea>
+          <label>Community Events section title</label>
+          <input type="text" data-path="sections.community_title" />
+          <label>Community Events section intro</label>
+          <textarea data-path="sections.community_intro"></textarea>
+        </div>
+      </details>
+
+      <!-- ============ FARMDROP EVENTS ============ -->
+      <details class="section">
+        <summary><h2>FarmDrop Events (fundraisers)</h2></summary>
+        <div class="section-body">
+
+          <div class="event-card-edit">
+            <h3>Soulbenders Benefit (May 24)</h3>
+            <div class="three-col">
+              <div>
+                <label>Month</label>
+                <input type="text" data-path="events.may24.month" />
+              </div>
+              <div>
+                <label>Day</label>
+                <input type="text" data-path="events.may24.day" />
+              </div>
+              <div>
+                <label>Weekday / year</label>
+                <input type="text" data-path="events.may24.weekday" />
+              </div>
+            </div>
+            <label>Title</label>
+            <input type="text" data-path="events.may24.title" />
+            <div class="two-col">
+              <div>
+                <label>Location</label>
+                <input type="text" data-path="events.may24.location" />
+              </div>
+              <div>
+                <label>Time</label>
+                <input type="text" data-path="events.may24.time" />
+              </div>
+            </div>
+            <label>Admission / price</label>
+            <input type="text" data-path="events.may24.admission" />
+            <label>Tags (comma separated)</label>
+            <input type="text" data-path="events.may24.tags" />
+            <p class="tag-hint">Example: Featured, Benefit, Live Music, Dance Party. First tag gets a highlighted style.</p>
+            <label>Description</label>
+            <textarea data-path="events.may24.description"></textarea>
+            <div class="two-col">
+              <div>
+                <label>Primary button label</label>
+                <input type="text" data-path="events.may24.primary_label" />
+              </div>
+              <div>
+                <label>Primary button URL</label>
+                <input type="url" data-path="events.may24.primary_url" />
+              </div>
+              <div>
+                <label>Secondary button label (blank to hide)</label>
+                <input type="text" data-path="events.may24.secondary_label" />
+              </div>
+              <div>
+                <label>Secondary button URL</label>
+                <input type="url" data-path="events.may24.secondary_url" />
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card-edit">
+            <h3>Sassafras Cafe (Aug 6)</h3>
+            <div class="three-col">
+              <div>
+                <label>Month</label>
+                <input type="text" data-path="events.aug6.month" />
+              </div>
+              <div>
+                <label>Day</label>
+                <input type="text" data-path="events.aug6.day" />
+              </div>
+              <div>
+                <label>Weekday / year</label>
+                <input type="text" data-path="events.aug6.weekday" />
+              </div>
+            </div>
+            <label>Title</label>
+            <input type="text" data-path="events.aug6.title" />
+            <div class="two-col">
+              <div>
+                <label>Location</label>
+                <input type="text" data-path="events.aug6.location" />
+              </div>
+              <div>
+                <label>Time</label>
+                <input type="text" data-path="events.aug6.time" />
+              </div>
+            </div>
+            <label>Admission / price</label>
+            <input type="text" data-path="events.aug6.admission" />
+            <label>Tags (comma separated)</label>
+            <input type="text" data-path="events.aug6.tags" />
+            <label>Description</label>
+            <textarea data-path="events.aug6.description"></textarea>
+            <div class="two-col">
+              <div>
+                <label>Primary button label</label>
+                <input type="text" data-path="events.aug6.primary_label" />
+              </div>
+              <div>
+                <label>Primary button URL</label>
+                <input type="url" data-path="events.aug6.primary_url" />
+              </div>
+              <div>
+                <label>Secondary button label</label>
+                <input type="text" data-path="events.aug6.secondary_label" />
+              </div>
+              <div>
+                <label>Secondary button URL</label>
+                <input type="url" data-path="events.aug6.secondary_url" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </details>
 
-      <div class="section">
-        <h2>Community Events FarmDrop Is Joining</h2>
+      <!-- ============ COMMUNITY EVENTS ============ -->
+      <details class="section">
+        <summary><h2>Community Events FarmDrop Is Joining</h2></summary>
+        <div class="section-body">
 
-        <div class="event-card-edit">
-          <h3>May 9 - Reversing Falls</h3>
+          <div class="event-card-edit">
+            <h3>Reversing Falls (May 9)</h3>
+            <div class="three-col">
+              <div>
+                <label>Month</label>
+                <input type="text" data-path="events.may9.month" />
+              </div>
+              <div>
+                <label>Day</label>
+                <input type="text" data-path="events.may9.day" />
+              </div>
+              <div>
+                <label>Weekday / year</label>
+                <input type="text" data-path="events.may9.weekday" />
+              </div>
+            </div>
+            <label>Title</label>
+            <input type="text" data-path="events.may9.title" />
+            <div class="two-col">
+              <div>
+                <label>Location</label>
+                <input type="text" data-path="events.may9.location" />
+              </div>
+              <div>
+                <label>Admission / price</label>
+                <input type="text" data-path="events.may9.admission" />
+              </div>
+            </div>
+            <label>Time (optional - shown if filled)</label>
+            <input type="text" data-path="events.may9.time" />
+            <label>Tags (comma separated)</label>
+            <input type="text" data-path="events.may9.tags" />
+            <label>Description</label>
+            <textarea data-path="events.may9.description"></textarea>
+            <div class="two-col">
+              <div>
+                <label>Primary button label</label>
+                <input type="text" data-path="events.may9.primary_label" />
+              </div>
+              <div>
+                <label>Primary button URL</label>
+                <input type="url" data-path="events.may9.primary_url" />
+              </div>
+            </div>
+          </div>
+
+          <div class="event-card-edit">
+            <h3>Ellsworth Public Library (May 23)</h3>
+            <div class="three-col">
+              <div>
+                <label>Month</label>
+                <input type="text" data-path="events.may23.month" />
+              </div>
+              <div>
+                <label>Day</label>
+                <input type="text" data-path="events.may23.day" />
+              </div>
+              <div>
+                <label>Weekday / year</label>
+                <input type="text" data-path="events.may23.weekday" />
+              </div>
+            </div>
+            <label>Title</label>
+            <input type="text" data-path="events.may23.title" />
+            <div class="two-col">
+              <div>
+                <label>Location</label>
+                <input type="text" data-path="events.may23.location" />
+              </div>
+              <div>
+                <label>Admission / price</label>
+                <input type="text" data-path="events.may23.admission" />
+              </div>
+            </div>
+            <label>Time (optional)</label>
+            <input type="text" data-path="events.may23.time" />
+            <label>Tags (comma separated)</label>
+            <input type="text" data-path="events.may23.tags" />
+            <label>Description</label>
+            <textarea data-path="events.may23.description"></textarea>
+            <div class="two-col">
+              <div>
+                <label>Primary button label</label>
+                <input type="text" data-path="events.may23.primary_label" />
+              </div>
+              <div>
+                <label>Primary button URL</label>
+                <input type="url" data-path="events.may23.primary_url" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ============ FOOD FOR HEALTH ============ -->
+      <details class="section">
+        <summary><h2>Food for Health Block</h2></summary>
+        <div class="section-body">
+          <label>Headline</label>
+          <input type="text" data-path="ffh.title" />
+          <label>Intro paragraph</label>
+          <textarea data-path="ffh.intro"></textarea>
+          <div class="two-col">
+            <div>
+              <label>Channel 1 title</label>
+              <input type="text" data-path="ffh.ch1_title" />
+            </div>
+            <div>
+              <label>Channel 1 body</label>
+              <textarea data-path="ffh.ch1_body"></textarea>
+            </div>
+            <div>
+              <label>Channel 2 title</label>
+              <input type="text" data-path="ffh.ch2_title" />
+            </div>
+            <div>
+              <label>Channel 2 body</label>
+              <textarea data-path="ffh.ch2_body"></textarea>
+            </div>
+            <div>
+              <label>Channel 3 title</label>
+              <input type="text" data-path="ffh.ch3_title" />
+            </div>
+            <div>
+              <label>Channel 3 body</label>
+              <textarea data-path="ffh.ch3_body"></textarea>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ============ BCZ YAPZ BLOCK ============ -->
+      <details class="section">
+        <summary><h2>BCZ YapZ Interview Block</h2></summary>
+        <div class="section-body">
           <label>Title</label>
-          <input type="text" data-path="events.may9.title" />
-          <div class="two-col">
-            <div>
-              <label>Location</label>
-              <input type="text" data-path="events.may9.location" />
-            </div>
-            <div>
-              <label>Admission / Price</label>
-              <input type="text" data-path="events.may9.admission" />
-            </div>
-          </div>
-          <label>Description</label>
-          <textarea data-path="events.may9.description"></textarea>
-          <div class="two-col">
-            <div>
-              <label>Primary button label</label>
-              <input type="text" data-path="events.may9.primary_label" />
-            </div>
-            <div>
-              <label>Primary button URL</label>
-              <input type="url" data-path="events.may9.primary_url" />
-            </div>
-          </div>
+          <input type="text" data-path="interview.title" />
+          <label>Blurb</label>
+          <textarea data-path="interview.blurb"></textarea>
+          <label>Watch link URL</label>
+          <input type="url" data-path="interview.url" />
         </div>
+      </details>
 
-        <div class="event-card-edit">
-          <h3>May 23 - Ellsworth Public Library</h3>
-          <label>Title</label>
-          <input type="text" data-path="events.may23.title" />
-          <div class="two-col">
-            <div>
-              <label>Location</label>
-              <input type="text" data-path="events.may23.location" />
-            </div>
-            <div>
-              <label>Admission / Price</label>
-              <input type="text" data-path="events.may23.admission" />
-            </div>
-          </div>
-          <label>Description</label>
-          <textarea data-path="events.may23.description"></textarea>
-          <div class="two-col">
-            <div>
-              <label>Primary button label</label>
-              <input type="text" data-path="events.may23.primary_label" />
-            </div>
-            <div>
-              <label>Primary button URL</label>
-              <input type="url" data-path="events.may23.primary_url" />
-            </div>
-          </div>
+      <!-- ============ FOOTER ============ -->
+      <details class="section">
+        <summary><h2>Footer</h2></summary>
+        <div class="section-body">
+          <label>Home page footer tagline</label>
+          <textarea data-path="footer.tagline_home"></textarea>
+          <label>Events page footer tagline</label>
+          <textarea data-path="footer.tagline_events"></textarea>
+          <label>Bottom credit line</label>
+          <input type="text" data-path="footer.credit_line" />
         </div>
-      </div>
+      </details>
 
-      <div class="section">
-        <h2>Food for Health Section</h2>
-        <label>Headline</label>
-        <input type="text" data-path="ffh.title" />
-        <label>Intro paragraph</label>
-        <textarea data-path="ffh.intro"></textarea>
-        <div class="two-col">
-          <div>
-            <label>Channel 1 title</label>
-            <input type="text" data-path="ffh.ch1_title" />
-          </div>
-          <div>
-            <label>Channel 1 body</label>
-            <textarea data-path="ffh.ch1_body"></textarea>
-          </div>
-          <div>
-            <label>Channel 2 title</label>
-            <input type="text" data-path="ffh.ch2_title" />
-          </div>
-          <div>
-            <label>Channel 2 body</label>
-            <textarea data-path="ffh.ch2_body"></textarea>
-          </div>
-          <div>
-            <label>Channel 3 title</label>
-            <input type="text" data-path="ffh.ch3_title" />
-          </div>
-          <div>
-            <label>Channel 3 body</label>
-            <textarea data-path="ffh.ch3_body"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>BCZ YapZ Interview Block</h2>
-        <label>Title</label>
-        <input type="text" data-path="interview.title" />
-        <label>Blurb</label>
-        <textarea data-path="interview.blurb"></textarea>
-        <label>Watch link URL</label>
-        <input type="url" data-path="interview.url" />
-      </div>
-
-      <div class="sticky-bar">
-        <a class="preview-link" href="events.html" target="_blank" rel="noopener">View live events page in new tab</a>
-        <button class="btn ghost" id="reload-btn">Reload from live</button>
-        <button class="btn" id="save-btn">Save &amp; Publish</button>
-      </div>
     </div>
   </main>
+
+  <div class="sticky-bar hidden" id="sticky-bar">
+    <a class="preview-link" href="events" target="_blank" rel="noopener">View live &uarr;</a>
+    <button class="btn ghost" id="reload-btn">Reload</button>
+    <button class="btn" id="save-btn">Save &amp; Publish</button>
+  </div>
 
   <div class="status" id="status"></div>
 
   <script>
     const loginEl = document.getElementById('login');
     const editorEl = document.getElementById('editor');
+    const stickyBar = document.getElementById('sticky-bar');
     const passwordInput = document.getElementById('password-input');
     const loginBtn = document.getElementById('login-btn');
     const loginError = document.getElementById('login-error');
@@ -449,7 +730,7 @@
     function showStatus(msg, kind) {
       statusEl.textContent = msg;
       statusEl.className = 'status show ' + (kind || '');
-      setTimeout(() => { statusEl.className = 'status ' + (kind || ''); }, 3000);
+      setTimeout(() => { statusEl.className = 'status ' + (kind || ''); }, 3500);
     }
 
     function resolve(obj, path) {
@@ -460,7 +741,7 @@
       const keys = path.split('.');
       let cur = obj;
       for (let i = 0; i < keys.length - 1; i++) {
-        if (cur[keys[i]] == null) cur[keys[i]] = {};
+        if (cur[keys[i]] == null || typeof cur[keys[i]] !== 'object') cur[keys[i]] = {};
         cur = cur[keys[i]];
       }
       cur[keys[keys.length - 1]] = value;
@@ -468,14 +749,28 @@
 
     function populateForm() {
       document.querySelectorAll('[data-path]').forEach((el) => {
-        const val = resolve(content, el.dataset.path);
+        const p = el.dataset.path;
+        if (p === '__markets_text') {
+          const arr = Array.isArray(content.markets) ? content.markets : [];
+          el.value = arr.join('\n');
+          return;
+        }
+        const val = resolve(content, p);
         el.value = val == null ? '' : val;
       });
     }
 
     function gatherForm() {
       document.querySelectorAll('[data-path]').forEach((el) => {
-        setByPath(content, el.dataset.path, el.value);
+        const p = el.dataset.path;
+        if (p === '__markets_text') {
+          content.markets = el.value
+            .split('\n')
+            .map((s) => s.trim())
+            .filter(Boolean);
+          return;
+        }
+        setByPath(content, p, el.value);
       });
     }
 
@@ -483,15 +778,13 @@
       const res = await fetch('/api/content?v=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed to load content');
       content = await res.json();
+      if (!content.markets) content.markets = [];
       populateForm();
     }
 
     async function unlock() {
       const pw = passwordInput.value.trim();
-      if (!pw) {
-        loginError.textContent = 'Enter a password.';
-        return;
-      }
+      if (!pw) { loginError.textContent = 'Enter a password.'; return; }
       loginError.textContent = '';
       try {
         const res = await fetch('/api/verify', {
@@ -499,16 +792,13 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ password: pw })
         });
-        if (!res.ok) {
-          const txt = await res.text();
-          loginError.textContent = 'Wrong password.';
-          return;
-        }
+        if (!res.ok) { loginError.textContent = 'Wrong password.'; return; }
         password = pw;
         sessionStorage.setItem(PASSWORD_KEY, pw);
         await loadContent();
         loginEl.classList.add('hidden');
         editorEl.classList.remove('hidden');
+        stickyBar.classList.remove('hidden');
         headerActions.innerHTML = '<button class="btn ghost" id="logout-btn">Sign out</button>';
         document.getElementById('logout-btn').onclick = logout;
       } catch (e) {
@@ -535,7 +825,7 @@
           const txt = await res.text();
           throw new Error(txt || 'Save failed');
         }
-        showStatus('Saved. Changes are live now - refresh the events page to see them.', 'ok');
+        showStatus('Saved. Refresh the live pages to see changes.', 'ok');
       } catch (e) {
         showStatus('Error: ' + e.message, 'err');
       } finally {
@@ -553,7 +843,7 @@
       try { await loadContent(); showStatus('Reloaded from live.', 'ok'); }
       catch { showStatus('Reload failed.', 'err'); }
       reloadBtn.disabled = false;
-      reloadBtn.textContent = 'Reload from live';
+      reloadBtn.textContent = 'Reload';
     };
 
     // Auto-login if password cached this session

@@ -1,8 +1,59 @@
 {
+  "home": {
+    "hero_eyebrow": "Maine Online Farmers Market",
+    "hero_title": "Local Food, Local Farmers, Maine-Wide.",
+    "hero_subtitle": "FarmDrop is a collaborative online marketplace connecting Maine farmers directly to communities. Farmers get paid up front. Customers shop once a week. Pickup happens at a regional hub. Zero waste, year-round.",
+    "hero_cta1_label": "Shop at farmdrop.us",
+    "hero_cta1_url": "https://farmdrop.us",
+    "hero_cta2_label": "See Upcoming Events",
+    "hero_cta2_url": "events.html",
+    "stat1_value": "65+",
+    "stat1_label": "Maine farm partners",
+    "stat2_value": "1,000+",
+    "stat2_label": "Customers served",
+    "stat3_value": "13+",
+    "stat3_label": "Pickup locations",
+    "stat4_value": "Since 2011",
+    "stat4_label": "Community food work",
+    "how_title": "How FarmDrop Works",
+    "how_intro": "A farmers' market and a CSA had an online baby. That is FarmDrop.",
+    "step1_title": "Farmers List Products",
+    "step1_body": "Local producers list everything they grow or make - no shelf-space limits. Unit sizes from a pint of jam to a whole lamb.",
+    "step2_title": "Customers Order Weekly",
+    "step2_body": "Shop online through your regional FarmDrop. Farmers get paid the moment you check out, not after delivery.",
+    "step3_title": "Market Hub Pickup",
+    "step3_body": "Farmers deliver in bulk to a regional Market Hub Manager who packs individual orders. You pick up midweek at your location.",
+    "step4_title": "Zero Waste",
+    "step4_body": "Farmers only bring what is sold. Customers only get what is fresh-harvested that morning. Nothing spoils on shelves.",
+    "teaser_title": "Spring & Summer 2026 Events",
+    "teaser_body": "Two FarmDrop fundraisers for Food for Health (May 24 Soulbenders benefit, Aug 6 Sassafras invite-only), plus a couple of community events across Downeast Maine where you can find Hannah.",
+    "teaser_cta": "View Events",
+    "markets_title": "FarmDrop Maine Markets"
+  },
+  "markets": [
+    "Blue Hill",
+    "Mount Desert Island",
+    "Deer Isle",
+    "Midcoast",
+    "Central Maine",
+    "Waterville",
+    "Lisbon",
+    "Linneus"
+  ],
   "hero": {
     "eyebrow": "FarmDrop Spring & Summer 2026",
     "title": "Gather. Eat. Build Maine's Food Future.",
     "subtitle": "Two FarmDrop fundraisers for Food for Health, plus a couple of community gatherings around Downeast Maine where you can come say hi and talk local food systems with Hannah."
+  },
+  "intro_cards": {
+    "card1_value": "2",
+    "card1_label": "FarmDrop fundraisers",
+    "card2_value": "2",
+    "card2_label": "Community events we're joining",
+    "card3_value": "2%",
+    "card3_label": "Of every FarmDrop order to Food for Health",
+    "card4_value": "Since 2011",
+    "card4_label": "Community food work in Maine"
   },
   "sections": {
     "farmdrop_title": "FarmDrop Events",
@@ -12,10 +63,14 @@
   },
   "events": {
     "may24": {
+      "month": "May",
+      "day": "24",
+      "weekday": "Sun 2026",
       "title": "Soulbenders Benefit for Food for Health",
       "location": "Venue TBC (Blue Hill / Ellsworth area)",
       "time": "5-8 PM",
       "admission": "Sliding-scale donation",
+      "tags": "Featured, Benefit, Live Music, Dance Party",
       "description": "The Soulbenders play a fundraiser for FarmDrop's Food for Health program. Afternoon conversation on community food systems and mutual aid, partner-org tabling, and a dance party to close. Every dollar goes to Food for Health - buying surplus from Maine farms and routing it to families hit by SNAP cuts. Come hungry, come dancing.",
       "primary_label": "RSVP / Donate",
       "primary_url": "https://farmdrop.us/ffh-report/",
@@ -23,10 +78,14 @@
       "secondary_url": "https://thesoulbenders.com"
     },
     "aug6": {
+      "month": "Aug",
+      "day": "6",
+      "weekday": "Thu 2026",
       "title": "Sam Lardner & Barcelona at Sassafras Cafe",
       "location": "Sassafras Cafe, Town Hill ME",
       "time": "Invite-only",
       "admission": "Fundraiser",
+      "tags": "Invite-Only, Live Music, Infrastructure Fund",
       "description": "A top-supporter evening with Sam Lardner & Barcelona. FarmDrop is raising funds for the infrastructure it takes to reach more Maine communities - vehicles, drivers, and cold storage to expand service into Washington County and beyond.",
       "primary_label": "Request Invite",
       "primary_url": "mailto:info@farmdrop.us?subject=Aug%206%20Sassafras%20event%20RSVP",
@@ -34,10 +93,14 @@
       "secondary_url": "https://farmdrop.us"
     },
     "may9": {
+      "month": "May",
+      "day": "9",
+      "weekday": "Sat 2026",
       "title": "Community Solutions Conversation",
       "location": "Reversing Falls Sanctuary, Brooksville ME",
       "time": "",
       "admission": "Free, open to public",
+      "tags": "Panel, Mutual Aid",
       "description": "A community conversation on mutual aid and food systems in Downeast Maine, hosted by Reversing Falls Sanctuary. Hannah Semler will speak on behalf of FarmDrop alongside other local organizations.",
       "primary_label": "Event Info",
       "primary_url": "https://www.reversingfalls.org/events-1",
@@ -45,10 +108,14 @@
       "secondary_url": ""
     },
     "may23": {
+      "month": "May",
+      "day": "23",
+      "weekday": "Sat 2026",
       "title": "Grocery List Documentary Screening",
       "location": "Ellsworth Public Library, Ellsworth ME",
       "time": "",
       "admission": "Free, open to public",
+      "tags": "Film, Community",
       "description": "A documentary screening hosted by Ellsworth Public Library as part of the Indie Lens Pop-Up series. FarmDrop will be on hand for the conversation afterward about where our food comes from and how local networks can replace long supply chains.",
       "primary_label": "Library Info",
       "primary_url": "https://ellsworthlibrary.net",
@@ -70,5 +137,10 @@
     "title": "Listen: Hannah Semler on BCZ YapZ",
     "blurb": "Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the spring and summer event lineup. Recorded April 22, 2026.",
     "url": "https://bettercallzaal.com/#yapz"
+  },
+  "footer": {
+    "tagline_events": "Maine's mission-driven online farmers market. 65+ farm partners, 1,000+ customers, regional hubs across Maine.",
+    "tagline_home": "Maine's mission-driven online farmers market. Supporting local farmers and feeding communities across Maine.",
+    "credit_line": "FarmDrop | Led by CEO Hannah Semler | Event page by BetterCallZaal"
   }
 }

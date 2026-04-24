@@ -49,6 +49,34 @@
         });
     });
 
+    // YouTube iframe embed - shows iframe when URL is set, hides otherwise
+    // Use: <div data-render="youtube" data-source="interview.youtube_url"></div>
+    const ytId = (s) => {
+      if (!s) return null;
+      const str = String(s).trim();
+      if (/^[A-Za-z0-9_-]{11}$/.test(str)) return str;
+      const m = str.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([A-Za-z0-9_-]{11})/);
+      return m ? m[1] : null;
+    };
+    document.querySelectorAll('[data-render="youtube"]').forEach((el) => {
+      const id = ytId(resolve(el.dataset.source));
+      if (!id) { el.style.display = 'none'; el.dataset.hasVideo = ''; return; }
+      el.dataset.hasVideo = '1';
+      el.style.removeProperty('display');
+      el.innerHTML =
+        '<iframe src="https://www.youtube-nocookie.com/embed/' + id +
+        '?rel=0" title="YouTube video" frameborder="0" ' +
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+        'allowfullscreen loading="lazy"></iframe>';
+    });
+
+    // Element is shown only when a data-source has NO youtube URL (fallback CTA)
+    // Use: <a data-render="youtube-fallback" data-source="interview.youtube_url" ...>
+    document.querySelectorAll('[data-render="youtube-fallback"]').forEach((el) => {
+      const id = ytId(resolve(el.dataset.source));
+      if (id) el.style.display = 'none';
+    });
+
     // Render an array of strings as a list of chips
     // Use: <div data-render="chips" data-source="markets" data-chip-class="market-chip"></div>
     document.querySelectorAll('[data-render="chips"]').forEach((el) => {

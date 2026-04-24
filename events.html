@@ -309,10 +309,30 @@
       padding: 2rem;
       border-radius: 12px;
       margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .interview-block-head {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 1.5rem;
+      gap: 1.25rem;
       align-items: center;
+    }
+    .interview-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #000;
+    }
+    .interview-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
     }
     .interview-block h3 {
       margin-bottom: 0.4rem;
@@ -430,11 +450,14 @@
 
 
     <div class="interview-block">
-      <div>
-        <h3 data-field="interview.title">Listen: Hannah Semler on BCZ YapZ</h3>
-        <p data-field="interview.blurb">Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the spring and summer event lineup. Recorded April 22, 2026.</p>
+      <div class="interview-block-head">
+        <div>
+          <h3 data-field="interview.title">Watch: Hannah Semler on BCZ YapZ</h3>
+          <p data-field="interview.blurb">Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the Soulbenders benefit.</p>
+        </div>
+        <a class="btn" data-render="youtube-fallback" data-source="interview.youtube_url" data-field-href="interview.url" data-field="interview.watch_label" href="https://bettercallzaal.com/#yapz" target="_blank" rel="noopener">Watch Episode</a>
       </div>
-      <a class="btn" data-field-href="interview.url" href="https://bettercallzaal.com/#yapz" target="_blank" rel="noopener">Watch Episode</a>
+      <div class="interview-video" data-render="youtube" data-source="interview.youtube_url" style="display:none;"></div>
     </div>
 
     <section class="ffh-callout" id="ffh">

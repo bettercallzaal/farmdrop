@@ -32,8 +32,10 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { blobs } = await list({ prefix: BLOB_PATHNAME, limit: 100 });
-    const urls = (blobs || []).map((b) => b.url);
+    const { blobs } = await list({ prefix: 'content', limit: 1000 });
+    const urls = (blobs || [])
+      .filter((b) => b.pathname && b.pathname.endsWith('.json'))
+      .map((b) => b.url);
     if (urls.length === 0) {
       return res.status(200).json({ ok: true, deleted: 0, note: 'No blobs to delete' });
     }

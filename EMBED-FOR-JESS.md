@@ -45,10 +45,8 @@ If you want it to inherit the parent site's fonts instead, we can swap the syste
 
 1. Hannah signs into `https://farmdrop.vercel.app/admin`
 2. Edits copy on any event, section headline, or Food for Health block
-3. Clicks **Save and Publish**
-4. The updated `content.json` is committed to the GitHub repo
-5. Vercel rebuilds the static site in about 30 seconds
-6. The iframe on farmdrop.us picks up the new content on next page load (or a hard refresh)
+3. Clicks **Save and Publish** - changes save to a shared content store
+4. The iframe on farmdrop.us picks up the new content on the next page load (or a hard refresh) - no redeploy cycle
 
 No CMS plugin, no FTP, no database touch on the WordPress side.
 

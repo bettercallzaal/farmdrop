@@ -480,7 +480,7 @@
     }
 
     async function loadContent() {
-      const res = await fetch('/content.json?v=' + Date.now(), { cache: 'no-store' });
+      const res = await fetch('/api/content?v=' + Date.now(), { cache: 'no-store' });
       if (!res.ok) throw new Error('Failed to load content');
       content = await res.json();
       populateForm();
@@ -535,7 +535,7 @@
           const txt = await res.text();
           throw new Error(txt || 'Save failed');
         }
-        showStatus('Saved. Site redeploys in ~30 seconds.', 'ok');
+        showStatus('Saved. Changes are live now - refresh the events page to see them.', 'ok');
       } catch (e) {
         showStatus('Error: ' + e.message, 'err');
       } finally {

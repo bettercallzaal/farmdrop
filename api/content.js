@@ -36,12 +36,20 @@ module.exports = async function handler(req, res) {
 
   if (process.env.BLOB_READ_WRITE_TOKEN) {
     try {
-      const { blobs } = await list({ prefix: BLOB_PATHNAME, limit: 10 });
+      const { blobs } = await list({ prefix: 'content', limit: 50 });
       const match = (blobs || [])
-        .filter((b) => b.pathname === BLOB_PATHNAME)
+        .filter((b) => b.pathname && b.pathname.endsWith('.json'))
         .sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt))[0];
       if (match && match.url) {
-        const upstream = await fetch(match.url, { cache: 'no-store' });
+        // Cache-bust: append a fresh query param so CDN never returns a stale copy
+        const bustedUrl = match.url + (match.url.includes('?') ? '&' : '?') + 'cb=' + Date.now();
+        const upstream = await fetch(bustedUrl, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        });
         if (upstream.ok) {
           const text = await upstream.text();
           try {

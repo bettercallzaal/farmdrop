@@ -682,8 +682,13 @@
           <input type="text" data-path="interview.title" />
           <label>Blurb</label>
           <textarea data-path="interview.blurb"></textarea>
-          <label>Watch link URL</label>
+          <label>YouTube video URL or ID (embeds video inline)</label>
+          <input type="text" data-path="interview.youtube_url" placeholder="https://youtu.be/... or just the 11-character ID" />
+          <p class="tag-hint">Paste the full YouTube URL (watch, share, shorts, or live). Leave blank to show the fallback button instead.</p>
+          <label>Fallback button link (shown only when video URL is blank)</label>
           <input type="url" data-path="interview.url" />
+          <label>Fallback button label</label>
+          <input type="text" data-path="interview.watch_label" />
         </div>
       </details>
 

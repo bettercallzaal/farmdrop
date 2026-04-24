@@ -134,9 +134,11 @@
     "ch3_body": "Select items priced so that buying one for yourself also funds one for a food-insecure neighbor through FFH's partner orgs."
   },
   "interview": {
-    "title": "Listen: Hannah Semler on BCZ YapZ",
-    "blurb": "Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the spring and summer event lineup. Recorded April 22, 2026.",
-    "url": "https://bettercallzaal.com/#yapz"
+    "title": "Watch: Hannah Semler on BCZ YapZ",
+    "blurb": "Thirty-minute conversation with FarmDrop CEO Hannah Semler on the origins of FarmDrop, the Food for Health program, and the Soulbenders benefit. Recorded April 22, 2026.",
+    "youtube_url": "",
+    "url": "https://bettercallzaal.com/#yapz",
+    "watch_label": "Watch on YouTube"
   },
   "footer": {
     "tagline_events": "Maine's mission-driven online farmers market. 65+ farm partners, 1,000+ customers, regional hubs across Maine.",
